@@ -7,7 +7,7 @@ Rally Point is a project name for a service that aims to make it simple and fast
 The aim is to build a web application where the user can do the following
 
 - Log in using Steam single sign on
-- Join into a queue and see who and how many players are in the queue and are needed for a new game start
+- Join into a queue (of the web app) and see who and how many players are in the queue and are needed for a new game start
 - When the queue is full all players will get a sound notification and a 30 second timer to press a button to confirm that they will be playing
 - Once all players have pressed the button the players start to vote for the team leaders
 - 2 players with the most votes will be assigned to be team leader
@@ -37,6 +37,8 @@ I was also thinking of using the following tech
 - Parcel
 - socket.io
 - PostgreSQL
+- Jest
+- styled-components
 
 This is of course a subject to change also
 
@@ -44,3 +46,28 @@ This is of course a subject to change also
 
 Contact me in Discord and let's talk about it!
 My Discord username is Zeikko#9514
+
+## Development
+
+### Installation
+
+- `cd server`
+- `yarn`
+- `cd ../client`
+- `yarn`
+
+### Starting
+
+#### Client
+
+- `cd client`
+- `yarn run watch`
+
+#### Server
+
+- `cd server`
+- `yarn run watch`
+
+### Opening
+
+- Open [http://localhost:8080/](http://localhost:8080/) in your favourite web browser
