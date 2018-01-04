@@ -4,4 +4,4 @@ cache: yarn
 
 install: ./scripts/install.sh
 
-script: ./scripts/lint.sh
+script: ./scripts/lint.sh && ./scripts/test.sh
