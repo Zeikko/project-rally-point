@@ -1,5 +1,7 @@
 # Rally Point
 
+[![Build Status](https://www.travis-ci.org/Zeikko/project-rally-point.svg?branch=master)](https://www.travis-ci.org/Zeikko/project-rally-point)
+
 Rally Point is a project name for a service that aims to make it simple and fast to organize and play high quality games in [Squad](https://joinsquad.com/).
 
 ## How is it going to work?
