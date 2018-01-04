@@ -12,14 +12,30 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "jest": "^22.0.4",
     "parcel-bundler": "^1.4.1"
   },
   "scripts": {
     "watch": "node node_modules/parcel-bundler/bin/cli.js watch src/index.js",
-    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore ."
+    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore .",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
+    "jest-styled-components": "^4.9.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "styled-components": "^2.4.0"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
