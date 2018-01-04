@@ -68,6 +68,18 @@ My Discord username is Zeikko#9514
 - `cd server`
 - `yarn run watch`
 
+### Linting
+
+#### Client
+
+- `cd client`
+- `yarn run lint`
+
+#### Server
+
+- `cd server`
+- `yarn run lint`
+
 ### Opening
 
 - Open [http://localhost:8080/](http://localhost:8080/) in your favourite web browser
