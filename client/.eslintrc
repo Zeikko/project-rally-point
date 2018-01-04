@@ -1,6 +1,7 @@
 {
   "extends": "../.eslintrc",
   "env": {
-    browser: true
+    browser: true,
+    jest: true
   }
 }
