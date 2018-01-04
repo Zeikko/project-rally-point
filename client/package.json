@@ -16,7 +16,7 @@
     "parcel-bundler": "^1.4.1"
   },
   "scripts": {
-    "watch": "node node_modules/parcel-bundler/bin/cli.js watch src/index.js",
+    "watch": "node node_modules/parcel-bundler/bin/cli.js watch src/index.jsx",
     "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore .",
     "test": "jest --coverage",
     "test:watch": "jest --watch"
