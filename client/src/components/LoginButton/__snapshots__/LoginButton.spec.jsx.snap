@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginButton renders correctly 1`] = `
+<a
+  href="/api/auth/login"
+>
+  <img
+    alt="Login"
+    src="/img/steam_login.png"
+  />
+</a>
+`;

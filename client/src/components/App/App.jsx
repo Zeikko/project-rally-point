@@ -16,6 +16,7 @@ function App(props) {
   )
 }
 
+/* istanbul ignore next */
 const mapStateToProps = ({
   user,
 }) => ({
@@ -27,4 +28,5 @@ App.propTypes = {
   user: propTypes.user.isRequired,
 }
 
+export { App as AppWithoutConnect }
 export default connect(mapStateToProps)(App)

@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LoginStatus renders initial state correctly 1`] = `
+<a
+  href="/api/auth/login"
+>
+  <img
+    alt="Login"
+    src="/img/steam_login.png"
+  />
+</a>
+`;
+
+exports[`LoginStatus renders loading state correctly 1`] = `null`;
+
+exports[`LoginStatus renders logged in state correctly 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  height: 32px;
+}
+
+.c2 {
+  line-height: 32px;
+  padding: 0 10px;
+}
+
+<div
+  className="c0"
+>
+  <img
+    alt="Test user"
+    className="c1"
+    src="http://avatar.test/small"
+  />
+  <div
+    className="c2"
+  >
+    Test user
+  </div>
+  <button
+    href="/api/auth/login"
+    onClick={[Function]}
+  >
+    Logout
+  </button>
+</div>
+`;
