@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HelloWorld from './components/HelloWorld/HelloWorld'
-import LoginButton from './components/LoginButton/LoginButton'
+import 'babel-polyfill'
+import { Provider } from 'react-redux'
+import store from './store'
+import App from './components/App/App'
 
 ReactDOM.render(
-  <div>
-    <HelloWorld />
-    <LoginButton />
-  </div>
-  , document.getElementById('app')
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , document.getElementById('app'),
 )

@@ -5,6 +5,7 @@
   "repository": "git@github.com:Zeikko/project-rally-point.git",
   "author": "Jaakko Ojalehto <jaakko@ojalehto.fi>",
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.14.0",
@@ -22,10 +23,16 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "jest-styled-components": "^4.9.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-test-renderer": "^16.2.0",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.16.0",
     "styled-components": "^2.4.0"
   },
   "jest": {

@@ -9,12 +9,16 @@ router.get('/callback', passport.authenticate('steam', { failureRedirect: '/logi
   res.redirect('/')
 })
 
-router.get('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   req.session.passport = {}
   req.logout()
   res.json({
     message: 'Logged out',
   })
+})
+
+router.get('/loggedin', (req, res) => {
+  res.json(req.user || null)
 })
 
 export default router
