@@ -28,8 +28,8 @@ describe('LoginStatus', () => {
           displayName: 'Test user',
           smallAvatarUrl: 'http://avatar.test/small',
           profileUrl: 'http://profile.test/user',
-          steamId: '123'
-        }
+          steamId: '123',
+        },
       }}
     />)
   })

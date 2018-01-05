@@ -5,7 +5,7 @@ import LogoutButton from './LogoutButton'
 
 describe('LogoutButton', () => {
   it('renders correctly', () => {
-    matchComponentToSnapshot(<LogoutButton dispatch={() => {} } />)
+    matchComponentToSnapshot(<LogoutButton dispatch={() => {}} />)
   })
 
   it('logs user out', () => {
@@ -14,8 +14,8 @@ describe('LogoutButton', () => {
     wrapper.find('button').simulate('click')
     expect(dispatch.mock.calls[0]).toEqual([
       {
-        type: 'LOGOUT_REQUEST'
-      }
+        type: 'LOGOUT_REQUEST',
+      },
     ])
   })
 })
