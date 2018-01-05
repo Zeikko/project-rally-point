@@ -65,6 +65,12 @@ My Discord username is Zeikko#9514
 - `cd client`
 - `yarn run watch`
 
+### Database
+
+- `cd server`
+- `docker-compose up -d`
+- `yarn run knex migrate:latest`
+
 #### Server
 
 - `cd server`

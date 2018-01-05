@@ -5,7 +5,12 @@
   "repository": "git@github.com:Zeikko/project-rally-point.git",
   "author": "Jaakko Ojalehto <jaakko@ojalehto.fi>",
   "dependencies": {
-    "express": "^4.16.2"
+    "connect-pg-simple": "^4.2.1",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "knex": "^0.14.2",
+    "passport": "^0.4.0",
+    "passport-steam": "^1.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -19,6 +24,7 @@
   },
   "scripts": {
     "watch": "NODE_ENV=development ./node_modules/.bin/nodemon -e js --exec ./node_modules/.bin/babel-node src/index.js",
-    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore ."
+    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore .",
+    "knex": "./node_modules/.bin/knex"
   }
 }
