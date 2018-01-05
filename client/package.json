@@ -15,8 +15,10 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "fetch-mock": "^6.0.0-beta.7",
     "jest": "^22.0.4",
-    "parcel-bundler": "^1.4.1"
+    "parcel-bundler": "^1.4.1",
+    "redux-saga-tester": "^1.0.378"
   },
   "scripts": {
     "watch": "node node_modules/parcel-bundler/bin/cli.js watch src/index.jsx",
@@ -38,7 +40,9 @@
     "styled-components": "^2.4.0"
   },
   "jest": {
-    "setupFiles": ["./src/test/setup.js"],
+    "setupFiles": [
+      "./src/test/setup.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,
