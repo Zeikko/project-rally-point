@@ -1,11 +1,19 @@
 version: '2'
 
 services:
-  project-rally-point-database:
-    container_name: project-rally-point-database
+  project-rally-point-development-database:
+    container_name: project-rally-point-development-database
     image: postgres:10.1
     ports:
       - 8081:5432
+    environment:
+      POSTGRES_USER: project_rally_point
+      POSTGRES_PASSWORD: password
+  project-rally-point-unit-test-database:
+    container_name: project-rally-point-unit-test-database
+    image: postgres:10.1
+    ports:
+      - 8082:5432
     environment:
       POSTGRES_USER: project_rally_point
       POSTGRES_PASSWORD: password

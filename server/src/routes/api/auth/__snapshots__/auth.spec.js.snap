@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`/api/auth /logout POST does nothing for non logged in user 1`] = `
+Object {
+  "message": "Logged out",
+}
+`;
+
+exports[`/api/auth /logout POST logs user out 1`] = `
+Object {
+  "message": "Logged out",
+}
+`;
