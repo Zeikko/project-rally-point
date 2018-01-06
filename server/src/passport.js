@@ -1,6 +1,7 @@
 import passport from 'passport'
 import { Strategy as SteamStrategy } from 'passport-steam'
 import db from './db'
+import config from './config'
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -19,7 +20,7 @@ passport.deserializeUser((id, done) => {
 passport.use(new SteamStrategy({
   returnURL: 'http://localhost:8080/api/auth/callback',
   realm: 'http://localhost:8080',
-  apiKey: process.env.STEAM_API_KEY,
+  apiKey: config.steamApiKey,
 }, (identifier, profile, done) => {
   db('user')
     .first('*')

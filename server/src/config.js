@@ -3,6 +3,7 @@ import _ from 'lodash'
 const {
   NODE_ENV,
   APP_ENV,
+  STEAM_API_KEY,
 } = process.env
 
 const appEnvConfig = {
@@ -22,4 +23,5 @@ const defaults = {
 export default _.defaults({
   nodeEnv: NODE_ENV,
   appEnv: APP_ENV,
+  steamApiKey: STEAM_API_KEY,
 }, appEnvConfig[APP_ENV], defaults)
