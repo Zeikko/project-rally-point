@@ -2,6 +2,10 @@
   "extends": "airbnb",
   "rules": {
     "semi": ["error", "never"],
-    "import/prefer-default-export": ["off"]
-  }
+    "import/prefer-default-export": ["off"],
+    "no-use-before-define": ["error", { "functions": false }],
+  },
+  "env": {
+    jest: true
+  },
 }

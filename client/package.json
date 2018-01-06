@@ -5,15 +5,20 @@
   "repository": "git@github.com:Zeikko/project-rally-point.git",
   "author": "Jaakko Ojalehto <jaakko@ojalehto.fi>",
   "devDependencies": {
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
+    "fetch-mock": "^6.0.0-beta.7",
     "jest": "^22.0.4",
-    "parcel-bundler": "^1.4.1"
+    "parcel-bundler": "^1.4.1",
+    "redux-saga-tester": "^1.0.378"
   },
   "scripts": {
     "watch": "node node_modules/parcel-bundler/bin/cli.js watch src/index.jsx",
@@ -22,13 +27,22 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "jest-styled-components": "^4.9.0",
+    "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
     "react-test-renderer": "^16.2.0",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-saga": "^0.16.0",
     "styled-components": "^2.4.0"
   },
   "jest": {
+    "setupFiles": [
+      "./src/test/setup.js"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 100,

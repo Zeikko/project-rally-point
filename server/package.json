@@ -5,20 +5,48 @@
   "repository": "git@github.com:Zeikko/project-rally-point.git",
   "author": "Jaakko Ojalehto <jaakko@ojalehto.fi>",
   "dependencies": {
-    "express": "^4.16.2"
+    "connect-pg-simple": "^4.2.1",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "knex": "^0.14.2",
+    "lodash": "^4.17.4",
+    "passport": "^0.4.0",
+    "passport-steam": "^1.0.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.14.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
-    "nodemon": "^1.14.7"
+    "jest": "^22.0.4",
+    "nodemon": "^1.14.7",
+    "passport-stub": "^1.1.1",
+    "supertest": "^3.0.0"
   },
   "scripts": {
-    "watch": "NODE_ENV=development ./node_modules/.bin/nodemon -e js --exec ./node_modules/.bin/babel-node src/index.js",
-    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore ."
+    "watch": "NODE_ENV=development APP_ENV=development ./node_modules/.bin/nodemon -e js --exec ./node_modules/.bin/babel-node src/index.js",
+    "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore .",
+    "knex": "./node_modules/.bin/knex",
+    "test": "NODE_ENV=test APP_ENV=unit-test jest --coverage --forceExit",
+    "test:watch": "NODE_ENV=test APP_ENV=unit-test  jest --watch"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "app.js",
+      "passport.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
