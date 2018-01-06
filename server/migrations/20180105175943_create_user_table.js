@@ -10,7 +10,7 @@ exports.up = knex => (
       table.string('fullAvatarUrl', 512)
       table.string('primaryClanId', 32)
       table.string('country', 32)
-      table.timestamp('created_at').notNullable().defaultTo(knex.fn.now())
+      table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
     })
 )
 

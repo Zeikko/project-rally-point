@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { logoutAction } from '../../actions/user-actions'
+import { joinGameAction } from '../../actions/game-actions'
 import Button from '../Button/Button'
 
 class LogoutButton extends Component {
@@ -10,14 +10,14 @@ class LogoutButton extends Component {
   }
 
   handleClick() {
-    const { dispatch } = this.props
-    dispatch(logoutAction())
+    const { dispatch, game } = this.props
+    dispatch(joinGameAction(game.data.id))
   }
 
   render() {
     return (
-      <Button onClick={this.handleClick} href="/api/auth/login">
-        Logout
+      <Button onClick={this.handleClick}>
+        Join Game
       </Button>
     )
   }

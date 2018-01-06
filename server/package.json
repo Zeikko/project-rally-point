@@ -6,12 +6,15 @@
   "author": "Jaakko Ojalehto <jaakko@ojalehto.fi>",
   "dependencies": {
     "connect-pg-simple": "^4.2.1",
+    "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "knex": "^0.14.2",
     "lodash": "^4.17.4",
     "passport": "^0.4.0",
-    "passport-steam": "^1.0.8"
+    "passport-steam": "^1.0.8",
+    "passport.socketio": "^3.7.0",
+    "socket.io": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
