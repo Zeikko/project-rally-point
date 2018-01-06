@@ -4,6 +4,7 @@ const {
   NODE_ENV,
   APP_ENV,
   STEAM_API_KEY,
+  DB_URL,
 } = process.env
 
 const appEnvConfig = {
@@ -25,4 +26,5 @@ export default _.defaults({
   nodeEnv: NODE_ENV,
   appEnv: APP_ENV,
   steamApiKey: STEAM_API_KEY,
+  dbUrl: DB_URL,
 }, appEnvConfig[APP_ENV], defaults)

@@ -7,7 +7,7 @@ addons:
 
 env:
   global:
-    - POSTGRES_URL="postgres://project_rally_point@localhost:5432/project_rally_point"
+    - DB_URL="postgres://project_rally_point@localhost:5432/project_rally_point"
 
 install: ./scripts/install.sh
 
