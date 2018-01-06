@@ -8,6 +8,7 @@ const {
 
 const appEnvConfig = {
   development: {
+    domain: 'http://localhost:8080',
     dbUrl: 'postgres://project_rally_point:password@localhost:8081/project_rally_point',
   },
   'unit-test': {

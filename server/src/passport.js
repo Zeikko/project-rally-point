@@ -18,8 +18,8 @@ passport.deserializeUser((id, done) => {
 })
 
 passport.use(new SteamStrategy({
-  returnURL: 'http://localhost:8080/api/auth/callback',
-  realm: 'http://localhost:8080',
+  returnURL: `${config.domain}/api/auth/callback`,
+  realm: config.domain,
   apiKey: config.steamApiKey,
 }, (identifier, profile, done) => {
   db('user')
