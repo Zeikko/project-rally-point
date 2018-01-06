@@ -20,4 +20,7 @@ export function getGameRequest(io, socket) {
       type: actions.GET_GAME_SUCCESS,
       data: game,
     }))
+    .catch(() => socket.emit('action', {
+      type: actions.GET_GAME_ERROR,
+    }))
 }

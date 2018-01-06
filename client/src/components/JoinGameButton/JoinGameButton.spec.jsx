@@ -17,7 +17,7 @@ describe('JoinGameButton', () => {
       {
         type: 'JOIN_GAME_REQUEST',
         socket: true,
-        gameId: 1
+        gameId: 1,
       },
     ])
   })

@@ -2,9 +2,7 @@ import React from 'react'
 import { AppWithoutConnect } from './App'
 import { matchComponentToSnapshot } from '../../test/snapshot'
 import initialState from '../../initial-state'
-import normalUser from '../../../../fixtures/normal-user.json'
 import game from '../../../../fixtures/game.json'
-
 
 describe('App', () => {
   it('renders initial state correctly', () => {

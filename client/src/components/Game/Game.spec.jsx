@@ -32,5 +32,4 @@ describe('Game', () => {
       user={{ isLoading: false, data: normalUser }}
     />)
   })
-
 })

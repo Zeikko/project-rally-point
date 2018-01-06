@@ -1,4 +1,3 @@
-import http from 'http'
 import socketIo from 'socket.io'
 import passportSocketIo from 'passport.socketio'
 import cookieParser from 'cookie-parser'

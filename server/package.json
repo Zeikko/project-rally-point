@@ -28,14 +28,15 @@
     "jest": "^22.0.4",
     "nodemon": "^1.14.7",
     "passport-stub": "^1.1.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "timekeeper": "^2.0.0"
   },
   "scripts": {
     "watch": "NODE_ENV=development APP_ENV=development ./node_modules/.bin/nodemon -e js --exec ./node_modules/.bin/babel-node src/index.js",
     "lint": "./node_modules/.bin/eslint --ext=.js,.jsx --max-warnings=0 --ignore-path ../.eslintignore .",
     "knex": "./node_modules/.bin/knex",
-    "test": "NODE_ENV=test APP_ENV=unit-test jest --coverage --forceExit",
-    "test:watch": "NODE_ENV=test APP_ENV=unit-test  jest --watch"
+    "test": "NODE_ENV=test APP_ENV=unit-test jest --coverage --runInBand --forceExit",
+    "test:watch": "NODE_ENV=test APP_ENV=unit-test  jest --runInBand --watch"
   },
   "jest": {
     "testEnvironment": "node",

@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import db from '../db'
 import actions from '../../../common/actions.json'
 
@@ -20,15 +21,9 @@ function getPlayersRequest(io, socket, action) {
       type: actions.GET_PLAYERS_SUCCESS,
       data: players,
     }))
-}
-
-function getGamePlayers(gameId) {
-  return db('player')
-    .select('user.*')
-    .leftJoin('user', 'player.userId', 'user.id')
-    .where({
-      gameId,
-    })
+    .catch(() => socket.emit('action', {
+      type: actions.GET_PLAYERS_ERROR,
+    }))
 }
 
 function joinGameRequest(io, socket, action) {
@@ -36,7 +31,7 @@ function joinGameRequest(io, socket, action) {
   return db('player')
     .insert({
       gameId,
-      userId: socket.request.user.id,
+      userId: _.get(socket, 'request.user.id'),
     })
     .then(() => {
       socket.emit('action', { type: actions.JOIN_GAME_SUCCESS })
@@ -52,7 +47,7 @@ function leaveGameRequest(io, socket, action) {
   return db('player')
     .delete({
       gameId,
-      userId: socket.request.user.id,
+      userId: _.get(socket, 'request.user.id'),
     })
     .then(() => {
       socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
@@ -61,6 +56,15 @@ function leaveGameRequest(io, socket, action) {
     .catch(() => socket.emit('action', {
       type: actions.LEAVE_GAME_ERROR,
     }))
+}
+
+function getGamePlayers(gameId) {
+  return db('player')
+    .select('user.*')
+    .leftJoin('user', 'player.userId', 'user.id')
+    .where({
+      gameId,
+    })
 }
 
 function broadcastGamePlayersUpdate(io, gameId) {

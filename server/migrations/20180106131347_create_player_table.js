@@ -4,7 +4,6 @@ exports.up = knex => (
       table.increments().primary()
       table.integer('gameId').notNullable()
       table.integer('userId').notNullable()
-      table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
     })
     .then(() =>
       knex.raw(`

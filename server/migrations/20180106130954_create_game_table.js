@@ -6,7 +6,6 @@ exports.up = knex => (
         'queue',
         'started',
       ]).notNullable().defaultTo('queue')
-      table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
     })
     .then(() =>
       knex('game').insert({}))

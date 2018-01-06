@@ -17,7 +17,7 @@ describe('LeaveGameButton', () => {
       {
         type: 'LEAVE_GAME_REQUEST',
         socket: true,
-        gameId: 1
+        gameId: 1,
       },
     ])
   })

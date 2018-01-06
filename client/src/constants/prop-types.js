@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 
 const userData = PropTypes.shape({
   country: PropTypes.string,
-  createdAt: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   fullAvatarUrl: PropTypes.string,
   id: PropTypes.number.isRequired,
@@ -21,7 +20,6 @@ export const user = PropTypes.shape({
 export const game = PropTypes.shape({
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    createdAt: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }),
 })
