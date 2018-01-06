@@ -2,6 +2,19 @@ language: node_js
 node_js: '9'
 cache: yarn
 
+addons:
+  postgresql: '9.6'
+
+env:
+  global:
+    - POSTGRES_URL="postgres://project_rally_point@localhost:5432/project_rally_point"
+
 install: ./scripts/install.sh
+
+before_script:
+  - psql -c 'CREATE USER project_rally_point WITH CREATEDB;' -U postgres
+  - psql -c 'ALTER USER project_rally_point superuser;' -U postgres
+  - psql -c 'CREATE DATABASE project_rally_point;' -U postgres
+  - psql -c 'ALTER DATABASE project_rally_point OWNER TO project_rally_point;' -U postgres
 
 script: ./scripts/lint.sh && ./scripts/test.sh
