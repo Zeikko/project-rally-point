@@ -22,8 +22,8 @@ const defaults = {
   pruneSessionInterval: 60,
   session: {
     key: 'login',
-    secret: 'secret'
-  }
+    secret: 'secret',
+  },
 }
 
 export default _.defaults({

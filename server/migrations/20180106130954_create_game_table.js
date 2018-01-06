@@ -4,13 +4,12 @@ exports.up = knex => (
       table.increments().primary()
       table.enum('status', [
         'queue',
-        'started'
+        'started',
       ]).notNullable().defaultTo('queue')
       table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now())
     })
     .then(() =>
-      knex('game').insert({})
-    )
+      knex('game').insert({}))
 )
 
 exports.down = knex => (knex.schema.dropTable('game'))

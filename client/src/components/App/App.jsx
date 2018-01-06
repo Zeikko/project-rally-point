@@ -36,6 +36,8 @@ const mapStateToProps = ({
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
   user: propTypes.user.isRequired,
+  game: propTypes.game.isRequired,
+  players: propTypes.players.isRequired,
 }
 
 export { App as AppWithoutConnect }

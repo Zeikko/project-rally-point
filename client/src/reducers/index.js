@@ -6,5 +6,5 @@ import players from './players-reducer'
 export default combineReducers({
   user,
   game,
-  players
+  players,
 })

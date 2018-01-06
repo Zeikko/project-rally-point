@@ -1,29 +1,72 @@
 import db from '../db'
-import actions from '../../../common/actions'
+import actions from '../../../common/actions.json'
 
-export default function game(io, socket, action) {
-  switch(action.type) {
+export default function handlePlayer(io, socket, action) {
+  switch (action.type) {
     case actions.GET_PLAYERS_REQUEST:
       return getPlayersRequest(io, socket, action)
+    case actions.JOIN_GAME_REQUEST:
+      return joinGameRequest(io, socket, action)
+    case actions.LEAVE_GAME_REQUEST:
+      return leaveGameRequest(io, socket, action)
+    default:
+      return null
   }
 }
 
-export function getPlayersRequest(io, socket, action) {
-  console.log(action)
+function getPlayersRequest(io, socket, action) {
   return getGamePlayers(action.gameId)
-    .then((players) => {
-      socket.emit('action', {
-        type: actions.GET_PLAYERS_SUCCESS,
-        data: players
-      })
+    .then(players => socket.emit('action', {
+      type: actions.GET_PLAYERS_SUCCESS,
+      data: players,
+    }))
+}
+
+function getGamePlayers(gameId) {
+  return db('player')
+    .select('user.*')
+    .leftJoin('user', 'player.userId', 'user.id')
+    .where({
+      gameId,
     })
 }
 
-export function getGamePlayers(gameId) {
+function joinGameRequest(io, socket, action) {
+  const { gameId } = action
   return db('player')
-    .select('*')
-    .leftJoin('user', 'player.userId', 'user.id')
-    .where({
-      gameId: gameId
+    .insert({
+      gameId,
+      userId: socket.request.user.id,
     })
+    .then(() => {
+      socket.emit('action', { type: actions.JOIN_GAME_SUCCESS })
+      return broadcastGamePlayersUpdate(io, action.gameId)
+    })
+    .catch(() => socket.emit('action', {
+      type: actions.JOIN_GAME_ERROR,
+    }))
+}
+
+function leaveGameRequest(io, socket, action) {
+  const { gameId } = action
+  return db('player')
+    .delete({
+      gameId,
+      userId: socket.request.user.id,
+    })
+    .then(() => {
+      socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
+      return broadcastGamePlayersUpdate(io, gameId)
+    })
+    .catch(() => socket.emit('action', {
+      type: actions.LEAVE_GAME_ERROR,
+    }))
+}
+
+function broadcastGamePlayersUpdate(io, gameId) {
+  return getGamePlayers(gameId)
+    .then(players => io.emit('action', {
+      type: actions.GET_PLAYERS_SUCCESS,
+      data: players,
+    }))
 }

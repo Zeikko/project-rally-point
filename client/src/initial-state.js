@@ -4,9 +4,9 @@ export default {
     data: null,
   },
   game: {
-    data: null
+    data: null,
   },
   players: {
-    data: null
+    data: null,
   },
 }
