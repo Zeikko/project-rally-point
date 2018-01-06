@@ -2,6 +2,7 @@ import React from 'react'
 import { matchComponentToSnapshot } from '../../test/snapshot'
 import LoginStatus from './LoginStatus'
 import initialState from '../../initial-state'
+import normalUser from '../../../../fixtures/normal-user.json'
 
 describe('LoginStatus', () => {
   it('renders initial state correctly', () => {
@@ -23,13 +24,7 @@ describe('LoginStatus', () => {
       dispatch={() => {}}
       user={{
         isLoading: false,
-        data: {
-          id: 1,
-          displayName: 'Test user',
-          smallAvatarUrl: 'http://avatar.test/small',
-          profileUrl: 'http://profile.test/user',
-          steamId: '123',
-        },
+        data: normalUser,
       }}
     />)
   })

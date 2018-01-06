@@ -12,7 +12,7 @@ class PlayersList extends Component {
 
   render() {
     const { players } = this.props
-    if (!players.data) {
+    if (!players.data.length) {
       return null
     }
     return (

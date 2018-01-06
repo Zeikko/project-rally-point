@@ -1,5 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`App renders correctly with game 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  background-color: #EEE;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.c1 {
+  font-size: 20px;
+}
+
+.c2 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    className="c0"
+  >
+    <div
+      className="c1"
+    >
+      Project Rally Point
+    </div>
+    <a
+      href="/api/auth/login"
+    >
+      <img
+        alt="Login"
+        src="/img/steam_login.png"
+      />
+    </a>
+  </div>
+  <button
+    className="c2"
+    onClick={[Function]}
+  >
+    Join Game
+  </button>
+</div>
+`;
+
 exports[`App renders initial state correctly 1`] = `
 .c0 {
   display: -webkit-box;

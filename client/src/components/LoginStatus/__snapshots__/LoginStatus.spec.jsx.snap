@@ -14,6 +14,13 @@ exports[`LoginStatus renders initial state correctly 1`] = `
 exports[`LoginStatus renders loading state correctly 1`] = `null`;
 
 exports[`LoginStatus renders logged in state correctly 1`] = `
+.c3 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -43,7 +50,7 @@ exports[`LoginStatus renders logged in state correctly 1`] = `
   <img
     alt="Test user"
     className="c1"
-    src="http://avatar.test/small"
+    src="http://avatar.test/small.jpg"
   />
   <div
     className="c2"
@@ -51,6 +58,7 @@ exports[`LoginStatus renders logged in state correctly 1`] = `
     Test user
   </div>
   <button
+    className="c3"
     href="/api/auth/login"
     onClick={[Function]}
   >

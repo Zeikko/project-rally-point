@@ -7,6 +7,6 @@ export default {
     data: null,
   },
   players: {
-    data: null,
+    data: [],
   },
 }

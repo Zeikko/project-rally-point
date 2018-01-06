@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game renders correctly when player is in the game 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+>
+  Leave Game
+</button>
+`;
+
+exports[`Game renders correctly when player is not in the game 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+>
+  Join Game
+</button>
+`;
+
+exports[`Game renders initial state correctly 1`] = `null`;

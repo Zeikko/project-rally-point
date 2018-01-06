@@ -26,4 +26,5 @@ app.get('/', (req, res) => res.sendFile('client/html/index.html', { root: path.r
 app.get('/client.js', (req, res) => res.sendFile('client/dist/index.js', { root: path.resolve(__dirname, '../../') }))
 app.use('/img', express.static(path.join(__dirname, '../../client/img')))
 
-export default http.createServer(app)
+export default app
+export const server = http.createServer(app)

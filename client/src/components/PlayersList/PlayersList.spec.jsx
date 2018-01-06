@@ -1,24 +1,24 @@
 import React from 'react'
-import { AppWithoutConnect } from './App'
 import { matchComponentToSnapshot } from '../../test/snapshot'
+import PlayersList from './PlayersList'
 import initialState from '../../initial-state'
 import normalUser from '../../../../fixtures/normal-user.json'
 import game from '../../../../fixtures/game.json'
 
-
-describe('App', () => {
+describe('PlayersList', () => {
   it('renders initial state correctly', () => {
-    matchComponentToSnapshot(<AppWithoutConnect
+    matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      {...initialState}
+      game={{ data: game }}
+      players={{ data: []}}
     />)
   })
 
-  it('renders correctly with game', () => {
-    matchComponentToSnapshot(<AppWithoutConnect
+  it('renders a player correctly', () => {
+    matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      {...initialState}
-      game={{ data: game }}
+      game={{ data: game }}
+      players={{ data: [normalUser]}}
     />)
   })
 })

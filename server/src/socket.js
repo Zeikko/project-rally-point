@@ -1,7 +1,8 @@
+import http from 'http'
 import socketIo from 'socket.io'
 import passportSocketIo from 'passport.socketio'
 import cookieParser from 'cookie-parser'
-import app from './app'
+import { server } from './app'
 import game, { getGameRequest } from './socket/game'
 import player from './socket/player'
 import sessionStore from './session-store'
@@ -15,7 +16,7 @@ io.use(passportSocketIo.authorize({
   secret: config.session.secret,
   store: sessionStore,
 }))
-io.attach(app)
+io.attach(server)
 io.on('connection', (socket) => {
   getGameRequest(io, socket)
   socket.on('action', (action) => {
