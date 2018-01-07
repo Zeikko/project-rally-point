@@ -1,7 +1,7 @@
 import SagaTester from 'redux-saga-tester'
 import fetchMock from 'fetch-mock'
 import { getUserAction, logoutAction } from '../actions/user-actions'
-import * as actions from '../constants/actions'
+import actions from '../../../common/actions.json'
 import initialState from '../initial-state'
 import userReducer from '../reducers/user-reducer'
 import { watchGetUser, watchLogout } from '../sagas/user-saga'
