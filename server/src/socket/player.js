@@ -20,7 +20,7 @@ async function getPlayersRequest(io, socket, action) {
     const players = await getGamePlayers(action.gameId)
     socket.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
   } catch (error) {
-    socket.emit('action', { type: actions.GET_PLAYERS_ERROR, error })
+    socket.emit('action', { type: actions.GET_PLAYERS_ERROR })
   }
 }
 
@@ -44,8 +44,7 @@ async function joinGameRequest(io, socket, action) {
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     }
   } catch (error) {
-    console.log(error)
-    socket.emit('action', { type: actions.JOIN_GAME_ERROR, error })
+    socket.emit('action', { type: actions.JOIN_GAME_ERROR })
   }
 }
 
@@ -63,9 +62,9 @@ async function leaveGameRequest(io, socket, action) {
         userId: socket.userId,
       })
     socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
-    broadcastGamePlayersUpdate(io, gameId)
+    await broadcastGamePlayersUpdate(io, gameId)
   } catch (error) {
-    socket.emit('action', { type: actions.LEAVE_GAME_ERROR, error })
+    socket.emit('action', { type: actions.LEAVE_GAME_ERROR })
   }
 }
 

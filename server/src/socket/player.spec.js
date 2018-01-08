@@ -23,7 +23,7 @@ describe('playerHandler', () => {
     beforeEach(() => db('user').insert(normalUserFixture)
       .then(() => db('player').insert({
         gameId: 1,
-        userId: 1,
+        userId: normalUserFixture.id,
       })))
 
     it('gets players', () => {
@@ -62,7 +62,7 @@ describe('playerHandler', () => {
       const io = { emit: jest.fn() }
       const socket = {
         emit: jest.fn(),
-        request: { user: { id: 1 } },
+        userId: normalUserFixture.id,
       }
       return handlePlayer(io, socket, {
         type: actions.JOIN_GAME_REQUEST,
@@ -97,14 +97,14 @@ describe('playerHandler', () => {
     beforeEach(() => db('user').insert(normalUserFixture)
       .then(() => db('player').insert({
         gameId: 1,
-        userId: 1,
+        userId: normalUserFixture.id,
       })))
 
     it('leaves a game', () => {
       const io = { emit: jest.fn() }
       const socket = {
         emit: jest.fn(),
-        request: { user: { id: 1 } },
+        userId: normalUserFixture.id,
       }
       return handlePlayer(io, socket, {
         type: actions.LEAVE_GAME_REQUEST,

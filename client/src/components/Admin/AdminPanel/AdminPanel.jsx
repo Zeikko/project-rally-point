@@ -7,7 +7,7 @@ import SimulateQueueEmpty from '../SimulateQueueEmpty/SimulateQueueEmpty'
 
 function AdminPanel(props) {
   const {
-    dispatch, user, game, players,
+    dispatch, user, game,
   } = props
   if (_.get(user, 'data.role') !== 'admin') {
     return null

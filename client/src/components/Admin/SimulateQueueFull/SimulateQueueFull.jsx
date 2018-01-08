@@ -13,9 +13,9 @@ class SimulateQueueFull extends Component {
 
   async handleClick() {
     const { dispatch, game } = this.props
-    for(let id = 1; id <= 48; id++) {
+    for (let id = 1; id <= 48; id += 1) {
       dispatch(joinGameAction(game.data.id, id))
-      await sleep(_.random(10, 100))
+      sleep(_.random(10, 100)) // eslint-disable-line no-await-in-loop
     }
   }
 
@@ -36,5 +36,5 @@ SimulateQueueFull.propTypes = {
 export default SimulateQueueFull
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(resolve => setTimeout(resolve, ms))
 }

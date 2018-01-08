@@ -16,7 +16,7 @@ function Game(props) {
   return (
     <div>
       <div>{game.data.status}</div>
-      {isPlayerInGame ? 
+      {isPlayerInGame ?
         <LeaveGameButton game={game} user={user} dispatch={dispatch} /> :
         <JoinGameButton game={game} user={user} dispatch={dispatch} />
       }
