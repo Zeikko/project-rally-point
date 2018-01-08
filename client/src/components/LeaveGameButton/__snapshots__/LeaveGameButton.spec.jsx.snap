@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LogoutButton renders correctly 1`] = `
+exports[`LeaveGameButton renders correctly 1`] = `
 .c0 {
   font-size: 18px;
   border: solid black 1px;
@@ -10,9 +10,8 @@ exports[`LogoutButton renders correctly 1`] = `
 
 <button
   className="c0"
-  href="/api/auth/login"
   onClick={[Function]}
 >
-  Logout
+  Leave Game
 </button>
 `;

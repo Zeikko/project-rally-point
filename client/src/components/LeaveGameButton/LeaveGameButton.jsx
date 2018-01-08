@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { logoutAction } from '../../actions/user-actions'
+import { leaveGameAction } from '../../actions/player-actions'
 import Button from '../Button/Button'
+import * as propTypes from '../../constants/prop-types'
 
 class LogoutButton extends Component {
   constructor() {
@@ -10,14 +11,14 @@ class LogoutButton extends Component {
   }
 
   handleClick() {
-    const { dispatch } = this.props
-    dispatch(logoutAction())
+    const { dispatch, game } = this.props
+    dispatch(leaveGameAction(game.data.id))
   }
 
   render() {
     return (
-      <Button onClick={this.handleClick} href="/api/auth/login">
-        Logout
+      <Button onClick={this.handleClick}>
+        Leave Game
       </Button>
     )
   }
@@ -25,6 +26,7 @@ class LogoutButton extends Component {
 
 LogoutButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  game: propTypes.game.isRequired,
 }
 
 export default LogoutButton

@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { getUser, logout } from '../api/user'
-import * as actions from '../constants/actions'
+import actions from '../../../common/actions.json'
 
 export function* watchGetUser() {
   yield takeLatest(actions.GET_USER_REQUEST, getUserSaga)

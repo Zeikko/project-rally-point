@@ -1,20 +1,20 @@
+import http from 'http'
 import express from 'express'
 import path from 'path'
+import cookieParser from 'cookie-parser'
 import session from 'express-session'
-import connectPgSimple from 'connect-pg-simple'
 import api from './routes/api'
 import passport from './passport'
+import sessionStore from './session-store'
 import config from './config'
 
-const PgSession = connectPgSimple(session)
 const app = express()
 
+app.use(cookieParser())
 app.use(session({
-  secret: 'secret',
-  store: new PgSession({
-    conString: config.dbUrl,
-    pruneSessionInterval: config.pruneSessionInterval,
-  }),
+  key: config.session.key,
+  secret: config.session.secret,
+  store: sessionStore,
   resave: false,
   saveUninitialized: true,
 }))
@@ -27,3 +27,4 @@ app.get('/client.js', (req, res) => res.sendFile('client/dist/index.js', { root:
 app.use('/img', express.static(path.join(__dirname, '../../client/img')))
 
 export default app
+export const server = http.createServer(app)

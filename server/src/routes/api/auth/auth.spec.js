@@ -10,10 +10,10 @@ passportStub.install(app)
 const request = supertest(app)
 
 describe('/api/auth', () => {
-  beforeAll(() => migrateLatest()
+  beforeEach(() => migrateLatest()
     .then(() => db('user').insert([normalUserFixture])))
 
-  afterAll(() => migrateRollback())
+  afterEach(() => migrateRollback())
 
   afterEach((done) => {
     passportStub.logout()

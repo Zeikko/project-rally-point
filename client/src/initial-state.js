@@ -3,4 +3,10 @@ export default {
     isLoading: false,
     data: null,
   },
+  game: {
+    data: null,
+  },
+  players: {
+    data: [],
+  },
 }

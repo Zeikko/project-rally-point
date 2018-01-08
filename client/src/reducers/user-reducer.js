@@ -1,5 +1,5 @@
 import initialState from '../initial-state'
-import * as actions from '../constants/actions'
+import actions from '../../../common/actions.json'
 
 export default function (state = initialState.user, action) {
   switch (action.type) {

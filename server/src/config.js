@@ -20,6 +20,10 @@ const appEnvConfig = {
 
 const defaults = {
   pruneSessionInterval: 60,
+  session: {
+    key: 'login',
+    secret: 'secret',
+  },
 }
 
 export default _.defaults({

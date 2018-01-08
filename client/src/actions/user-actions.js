@@ -1,4 +1,4 @@
-import * as actions from '../constants/actions'
+import actions from '../../../common/actions.json'
 
 export const getUserAction = () => ({
   type: actions.GET_USER_REQUEST,
