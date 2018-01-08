@@ -13,10 +13,15 @@ function Game(props) {
     return null
   }
   const isPlayerInGame = _.find(players.data, { id: _.get(user, 'data.id') })
-  if (isPlayerInGame) {
-    return <LeaveGameButton game={game} user={user} dispatch={dispatch} />
-  }
-  return <JoinGameButton game={game} user={user} dispatch={dispatch} />
+  return (
+    <div>
+      <div>{game.data.status}</div>
+      {isPlayerInGame ? 
+        <LeaveGameButton game={game} user={user} dispatch={dispatch} /> :
+        <JoinGameButton game={game} user={user} dispatch={dispatch} />
+      }
+    </div>
+  )
 }
 
 Game.propTypes = {

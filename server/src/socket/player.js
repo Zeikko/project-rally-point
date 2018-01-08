@@ -1,6 +1,6 @@
-import _ from 'lodash'
 import db from '../db'
 import actions from '../../../common/actions.json'
+import { startCaptainVote, getGameStatus, shouldStartCaptainVote, createNewGame } from './game'
 
 export default function handlePlayer(io, socket, action) {
   switch (action.type) {
@@ -15,62 +15,68 @@ export default function handlePlayer(io, socket, action) {
   }
 }
 
-function getPlayersRequest(io, socket, action) {
-  return getGamePlayers(action.gameId)
-    .then(players => socket.emit('action', {
-      type: actions.GET_PLAYERS_SUCCESS,
-      data: players,
-    }))
-    .catch(() => socket.emit('action', {
-      type: actions.GET_PLAYERS_ERROR,
-    }))
+async function getPlayersRequest(io, socket, action) {
+  try {
+    const players = await getGamePlayers(action.gameId)
+    socket.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
+  } catch (error) {
+    socket.emit('action', { type: actions.GET_PLAYERS_ERROR, error })
+  }
 }
 
-function joinGameRequest(io, socket, action) {
-  const { gameId } = action
-  return db('player')
-    .insert({
+async function joinGameRequest(io, socket, action) {
+  try {
+    const { gameId } = action
+    const { status } = await getGameStatus(gameId)
+    if (status !== 'queue') {
+      throw Error('Game is already started')
+    }
+    await db('player').insert({
       gameId,
-      userId: _.get(socket, 'request.user.id'),
+      userId: socket.userId,
     })
-    .then(() => {
-      socket.emit('action', { type: actions.JOIN_GAME_SUCCESS })
-      return broadcastGamePlayersUpdate(io, action.gameId)
-    })
-    .catch(() => socket.emit('action', {
-      type: actions.JOIN_GAME_ERROR,
-    }))
+    socket.emit('action', { type: actions.JOIN_GAME_SUCCESS })
+    await broadcastGamePlayersUpdate(io, action.gameId)
+    const willStartCaptainVote = await shouldStartCaptainVote(gameId)
+    if (willStartCaptainVote) {
+      await createNewGame()
+      const game = await startCaptainVote(gameId)
+      io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
+    }
+  } catch (error) {
+    console.log(error)
+    socket.emit('action', { type: actions.JOIN_GAME_ERROR, error })
+  }
 }
 
-function leaveGameRequest(io, socket, action) {
-  const { gameId } = action
-  return db('player')
-    .delete({
-      gameId,
-      userId: _.get(socket, 'request.user.id'),
-    })
-    .then(() => {
-      socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
-      return broadcastGamePlayersUpdate(io, gameId)
-    })
-    .catch(() => socket.emit('action', {
-      type: actions.LEAVE_GAME_ERROR,
-    }))
+async function leaveGameRequest(io, socket, action) {
+  try {
+    const { gameId } = action
+    const game = await getGameStatus(gameId)
+    if (game.status !== 'queue') {
+      throw Error('Game is already started')
+    }
+    await db('player')
+      .delete()
+      .where({
+        gameId,
+        userId: socket.userId,
+      })
+    socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
+    broadcastGamePlayersUpdate(io, gameId)
+  } catch (error) {
+    socket.emit('action', { type: actions.LEAVE_GAME_ERROR, error })
+  }
 }
 
 function getGamePlayers(gameId) {
   return db('player')
     .select('user.*')
     .leftJoin('user', 'player.userId', 'user.id')
-    .where({
-      gameId,
-    })
+    .where({ gameId })
 }
 
-function broadcastGamePlayersUpdate(io, gameId) {
-  return getGamePlayers(gameId)
-    .then(players => io.emit('action', {
-      type: actions.GET_PLAYERS_SUCCESS,
-      data: players,
-    }))
+async function broadcastGamePlayersUpdate(io, gameId) {
+  const players = await getGamePlayers(gameId)
+  io.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
 }

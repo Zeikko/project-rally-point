@@ -4,7 +4,7 @@ exports.up = knex => (
       table.increments().primary()
       table.enum('status', [
         'queue',
-        'started',
+        'voting captains',
       ]).notNullable().defaultTo('queue')
     })
     .then(() =>
