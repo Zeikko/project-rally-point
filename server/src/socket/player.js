@@ -1,6 +1,7 @@
 import db from '../db'
 import actions from '../../../common/actions.json'
-import { startCaptainVote, getGameStatus, shouldStartCaptainVote, createNewGame } from './game'
+import { startCaptainVote, getGameStatus, shouldStartCaptainVote, createNewGame } from '../helpers/game'
+import logger from '../logger'
 
 export default function handlePlayer(io, socket, action) {
   switch (action.type) {
@@ -20,6 +21,7 @@ async function getPlayersRequest(io, socket, action) {
     const players = await getGamePlayers(action.gameId)
     socket.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
   } catch (error) {
+    logger.error(error)
     socket.emit('action', { type: actions.GET_PLAYERS_ERROR })
   }
 }
@@ -44,6 +46,7 @@ async function joinGameRequest(io, socket, action) {
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     }
   } catch (error) {
+    logger.error(error)
     socket.emit('action', { type: actions.JOIN_GAME_ERROR })
   }
 }
@@ -64,6 +67,7 @@ async function leaveGameRequest(io, socket, action) {
     socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
     await broadcastGamePlayersUpdate(io, gameId)
   } catch (error) {
+    logger.error(error)
     socket.emit('action', { type: actions.LEAVE_GAME_ERROR })
   }
 }
