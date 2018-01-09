@@ -15,7 +15,7 @@ class SimulateQueueFull extends Component {
     const { dispatch, game } = this.props
     for (let id = 1; id <= 48; id += 1) {
       dispatch(joinGameAction(game.data.id, id))
-      sleep(_.random(10, 100)) // eslint-disable-line no-await-in-loop
+      await sleep(_.random(10, 100)) // eslint-disable-line no-await-in-loop
     }
   }
 

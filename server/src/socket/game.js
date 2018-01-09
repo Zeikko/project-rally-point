@@ -25,10 +25,13 @@ export async function getGameRequest(io, socket) {
 }
 
 export async function shouldStartCaptainVote(gameId) {
+  const game = await db('game')
+    .first('*')
+    .where({ id: gameId })
   const numberOfPlayers = await db('player')
     .count('id')
     .where({ gameId })
-  return parseInt(numberOfPlayers[0].count, 10) === 48
+  return parseInt(numberOfPlayers[0].count, 10) === game.maxPlayers
 }
 
 export async function startCaptainVote(gameId) {

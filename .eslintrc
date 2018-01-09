@@ -3,7 +3,7 @@
   "rules": {
     "semi": ["error", "never"],
     "import/prefer-default-export": ["off"],
-    "no-use-before-define": ["error", { "functions": false }],
+    "no-use-before-define": ["error", { "functions": false }]
   },
   "env": {
     jest: true

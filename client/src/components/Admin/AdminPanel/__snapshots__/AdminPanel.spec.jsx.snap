@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminPanel renders correctly admin user 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<div>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Simulate Queue Full
+  </button>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Simulate Queue Empty
+  </button>
+</div>
+`;
+
+exports[`AdminPanel renders initial state correctly 1`] = `null`;
