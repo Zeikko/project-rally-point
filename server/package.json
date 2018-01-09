@@ -45,7 +45,8 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "app.js",
-      "passport.js"
+      "passport.js",
+      "logger.js"
     ],
     "coverageThreshold": {
       "global": {
