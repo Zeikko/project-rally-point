@@ -20,6 +20,7 @@ export async function getGameRequest(io, socket) {
       })
     socket.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
   } catch (error) {
+    logger.error(error)
     socket.emit('action', { type: actions.GET_GAME_ERROR })
   }
 }
