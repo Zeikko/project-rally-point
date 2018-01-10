@@ -1,12 +1,12 @@
 export default {
-  user: {
+  userState: {
     isLoading: false,
-    data: null,
+    user: null,
   },
-  game: {
-    data: null,
+  gameState: {
+    game: null,
   },
-  players: {
-    data: [],
+  playersState: {
+    players: [],
   },
 }

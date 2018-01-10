@@ -16,7 +16,7 @@ describe('App', () => {
     matchComponentToSnapshot(<AppWithoutConnect
       dispatch={() => {}}
       {...initialState}
-      game={{ data: game }}
+      gameState={{ game }}
     />)
   })
 })

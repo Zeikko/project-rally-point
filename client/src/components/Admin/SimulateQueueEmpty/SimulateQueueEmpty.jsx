@@ -12,9 +12,9 @@ class SimulateQueueEmpty extends Component {
   }
 
   async handleClick() {
-    const { dispatch, game } = this.props
+    const { dispatch, gameState } = this.props
     for (let id = 1; id <= 48; id += 1) {
-      dispatch(leaveGameAction(game.data.id, id))
+      dispatch(leaveGameAction(gameState.game.id, id))
       await sleep(_.random(10, 100)) // eslint-disable-line no-await-in-loop
     }
   }
@@ -30,7 +30,7 @@ class SimulateQueueEmpty extends Component {
 
 SimulateQueueEmpty.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  game: propTypes.game.isRequired,
+  gameState: propTypes.gameState.isRequired,
 }
 
 export default SimulateQueueEmpty

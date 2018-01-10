@@ -8,23 +8,23 @@ describe('LoginStatus', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<LoginStatus
       dispatch={() => {}}
-      user={initialState.user}
+      userState={initialState.user}
     />)
   })
 
   it('renders loading state correctly', () => {
     matchComponentToSnapshot(<LoginStatus
       dispatch={() => {}}
-      user={{ isLoading: true }}
+      userState={{ isLoading: true }}
     />)
   })
 
   it('renders logged in state correctly', () => {
     matchComponentToSnapshot(<LoginStatus
       dispatch={() => {}}
-      user={{
+      userState={{
         isLoading: false,
-        data: normalUser,
+        user: normalUser,
       }}
     />)
   })

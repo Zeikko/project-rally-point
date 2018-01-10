@@ -3,25 +3,28 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { getPlayersAction } from '../../actions/player-actions'
 import * as propTypes from '../../constants/prop-types'
+import VoteCaptainButton from '../VoteCaptainButton/VoteCaptainButton'
+import gameStatuses from '../../../../common/game-statuses'
 
 class PlayersList extends Component {
   componentDidMount() {
-    const { dispatch, game } = this.props
-    dispatch(getPlayersAction(game.data.id))
+    const { dispatch, gameState } = this.props
+    dispatch(getPlayersAction(gameState.game.id))
   }
 
   render() {
-    const { players } = this.props
-    if (!players.data.length) {
+    const { playersState, gameState, dispatch } = this.props
+    if (!playersState.players.length) {
       return null
     }
     return (
       <div>
         <Heading>Players waiting for a game</Heading>
-        {players.data.map(player => (
+        {playersState.players.map(player => (
           <div key={player.id}>
             <img alt={player.displayName} src={player.smallAvatarUrl} />
             {player.displayName} ({player.country})
+            {gameState.game.status === gameStatuses.VOTE_CAPTAINS && <VoteCaptainButton dispatch={dispatch} player={player} gameState={gameState} />}
           </div>
         ))}
       </div>
@@ -31,8 +34,8 @@ class PlayersList extends Component {
 
 PlayersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  game: propTypes.game.isRequired,
-  players: propTypes.players.isRequired,
+  gameState: propTypes.gameState.isRequired,
+  playersState: propTypes.playersState.isRequired,
 }
 
 export default PlayersList

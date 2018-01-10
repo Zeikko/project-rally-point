@@ -4,6 +4,7 @@ import { migrateLatest, migrateRollback } from '../test/db'
 import normalUserFixture from '../../../fixtures/normal-user.json'
 import handlePlayer from './player'
 import actions from '../../../common/actions.json'
+import gameStatuses from '../../../common/game-statuses'
 
 timekeeper.freeze(new Date(1))
 
@@ -76,7 +77,7 @@ describe('playerHandler', () => {
     })
 
     it('throws an error when trying to join a full game', async () => {
-      const { 0: game } = await db('game').insert({ status: 'voting captains' }).returning('*')
+      const { 0: game } = await db('game').insert({ status: gameStatuses.VOTE_CAPTAINS }).returning('*')
       const io = { emit: jest.fn() }
       const socket = { emit: jest.fn(), userId: normalUserFixture.id }
       await handlePlayer(io, socket, {
@@ -108,7 +109,7 @@ describe('playerHandler', () => {
         data: {
           id: 2,
           maxPlayers: 1,
-          status: 'voting captains',
+          status: gameStatuses.VOTE_CAPTAINS,
         },
       }])
     })
@@ -156,7 +157,7 @@ describe('playerHandler', () => {
 
     it('throws an error when trying to join a full game', async () => {
       const { 0: game } = await db('game')
-        .insert({ status: 'voting captains' })
+        .insert({ status: gameStatuses.VOTE_CAPTAINS })
         .returning('*')
       await db('player')
         .insert({ gameId: game.id, userId: normalUserFixture.id })

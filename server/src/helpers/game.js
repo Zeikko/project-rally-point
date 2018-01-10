@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import db from '../db'
+import gameStatuses from '../../../common/game-statuses'
 
 export async function shouldStartCaptainVote(gameId) {
   const game = await db('game')
@@ -13,7 +14,7 @@ export async function shouldStartCaptainVote(gameId) {
 
 export async function startCaptainVote(gameId) {
   const games = await db('game')
-    .update({ status: 'voting captains' })
+    .update({ status: gameStatuses.VOTE_CAPTAINS })
     .where({ id: gameId })
     .returning('*')
   return _.first(games)

@@ -4,7 +4,7 @@ import game from './game-reducer'
 import players from './players-reducer'
 
 export default combineReducers({
-  user,
-  game,
-  players,
+  userState: user,
+  gameState: game,
+  playersState: players,
 })

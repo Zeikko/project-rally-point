@@ -10,7 +10,7 @@ describe('AdminPanel', () => {
     matchComponentToSnapshot(<AdminPanel
       dispatch={() => {}}
       {...initialState}
-      user={{ isLoading: false, data: normalUser }}
+      userState={{ isLoading: false, user: normalUser }}
     />)
   })
 
@@ -18,7 +18,7 @@ describe('AdminPanel', () => {
     matchComponentToSnapshot(<AdminPanel
       dispatch={() => {}}
       {...initialState}
-      user={{ isLoading: false, data: adminUser }}
+      userState={{ isLoading: false, user: adminUser }}
     />)
   })
 })

@@ -21,3 +21,10 @@ export const leaveGameAction = (gameId, userId) => ({
   userId,
 })
 
+export const voteCaptainAction = (gameId, playerId) => ({
+  type: actions.VOTE_CAPTAIN_REQUEST,
+  socket: true,
+  playerId,
+  gameId
+})
+

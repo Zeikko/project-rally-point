@@ -7,23 +7,23 @@ import SimulateQueueEmpty from '../SimulateQueueEmpty/SimulateQueueEmpty'
 
 function AdminPanel(props) {
   const {
-    dispatch, user, game,
+    dispatch, userState, gameState,
   } = props
-  if (_.get(user, 'data.role') !== 'admin') {
+  if (_.get(userState, 'user.role') !== 'admin') {
     return null
   }
   return (
     <div>
-      <SimulateQueueFull game={game} dispatch={dispatch} />
-      <SimulateQueueEmpty game={game} dispatch={dispatch} />
+      <SimulateQueueFull gameState={gameState} dispatch={dispatch} />
+      <SimulateQueueEmpty gameState={gameState} dispatch={dispatch} />
     </div>
   )
 }
 
 AdminPanel.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: propTypes.user.isRequired,
-  game: propTypes.game.isRequired,
+  userState: propTypes.userState.isRequired,
+  gameState: propTypes.gameState.isRequired,
 }
 
 export default AdminPanel

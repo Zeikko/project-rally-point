@@ -2,23 +2,26 @@ import db from '../db'
 import actions from '../../../common/actions.json'
 import { startCaptainVote, getGameStatus, shouldStartCaptainVote, createNewGame } from '../helpers/game'
 import logger from '../logger'
+import gameStatuses from '../../../common/game-statuses'
 
 export default function handlePlayer(io, socket, action) {
   switch (action.type) {
     case actions.GET_PLAYERS_REQUEST:
-      return getPlayersRequest(io, socket, action)
+      return getPlayersRequest(io, socket, action.gameId)
     case actions.JOIN_GAME_REQUEST:
-      return joinGameRequest(io, socket, action)
+      return joinGameRequest(io, socket, action.gameId)
     case actions.LEAVE_GAME_REQUEST:
-      return leaveGameRequest(io, socket, action)
+      return leaveGameRequest(io, socket, action.gameId)
+    case actions.VOTE_CAPTAIN_REQUEST:
+      return voteCaptainRequest(io, socket, action.gameId, action.playerId)
     default:
       return null
   }
 }
 
-async function getPlayersRequest(io, socket, action) {
+export async function getPlayersRequest(io, socket, gameId) {
   try {
-    const players = await getGamePlayers(action.gameId)
+    const players = await getGamePlayers(gameId)
     socket.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
   } catch (error) {
     logger.error(error)
@@ -26,11 +29,10 @@ async function getPlayersRequest(io, socket, action) {
   }
 }
 
-async function joinGameRequest(io, socket, action) {
+async function joinGameRequest(io, socket, gameId) {
   try {
-    const { gameId } = action
     const { status } = await getGameStatus(gameId)
-    if (status !== 'queue') {
+    if (status !== gameStatuses.QUEUE) {
       throw Error('Game is already started')
     }
     await db('player').insert({
@@ -51,11 +53,10 @@ async function joinGameRequest(io, socket, action) {
   }
 }
 
-async function leaveGameRequest(io, socket, action) {
+async function leaveGameRequest(io, socket, gameId) {
   try {
-    const { gameId } = action
     const game = await getGameStatus(gameId)
-    if (game.status !== 'queue') {
+    if (game.status !== gameStatuses.QUEUE) {
       throw Error('Game is already started')
     }
     await db('player')
@@ -69,6 +70,34 @@ async function leaveGameRequest(io, socket, action) {
   } catch (error) {
     logger.error(error)
     socket.emit('action', { type: actions.LEAVE_GAME_ERROR })
+  }
+}
+
+async function voteCaptainRequest(io, socket, gameId, playerId) {
+  try {
+    console.log(gameId)
+    const { status } = await getGameStatus(gameId)
+    if (status !== gameStatuses.VOTE_CAPTAINS) {
+      throw Error('Game is not in captain vote')
+    }
+    console.log(gameId, socket.userId, playerId)
+    await db('captainVote').insert({
+      gameId,
+      voterId: socket.userId,
+      votedId: playerId
+    })
+    socket.emit('action', { type: actions.VOTE_CAPTAIN_SUCCESS })
+    /*await broadcastGamePlayersUpdate(io, action.gameId)
+    const willStartCaptainVote = await shouldStartCaptainVote(gameId)
+    if (willStartCaptainVote) {
+      await createNewGame()
+      const game = await startCaptainVote(gameId)
+      io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
+    }*/
+  } catch (error) {
+    console.log(error)
+    logger.error(error)
+    socket.emit('action', { type: actions.VOTE_CAPTAIN_ERROR })
   }
 }
 

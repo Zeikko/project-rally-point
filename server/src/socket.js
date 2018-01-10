@@ -3,8 +3,8 @@ import socketIo from 'socket.io'
 import passportSocketIo from 'passport.socketio'
 import cookieParser from 'cookie-parser'
 import { server } from './app'
-import game, { getGameRequest } from './socket/game'
-import player from './socket/player'
+import handleGame, { getGameRequest } from './socket/game'
+import handlePlayer, { getPlayersRequest } from './socket/player'
 import sessionStore from './session-store'
 import config from './config'
 
@@ -17,12 +17,13 @@ io.use(passportSocketIo.authorize({
   store: sessionStore,
 }))
 io.attach(server)
-io.on('connection', (socket) => {
-  getGameRequest(io, socket)
+io.on('connection', async (socket) => {
+  const game = await getGameRequest(io, socket)
+  getPlayersRequest(io, socket, game.id)
   socket.on('action', (action) => {
     socket.userId = getUserId(action, socket) // eslint-disable-line no-param-reassign
-    game(io, socket, action)
-    player(io, socket, action)
+    handleGame(io, socket, action)
+    handlePlayer(io, socket, action)
   })
 })
 

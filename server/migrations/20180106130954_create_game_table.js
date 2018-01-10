@@ -3,9 +3,9 @@ exports.up = knex => (
     .createTable('game', (table) => {
       table.increments().primary()
       table.enum('status', [
-        'queue',
-        'voting captains',
-      ]).notNullable().defaultTo('queue')
+        'QUEUE',
+        'VOTE_CAPTAINS',
+      ]).notNullable().defaultTo('QUEUE')
       table.integer('maxPlayers').notNullable().defaultTo(48)
     })
     .then(() =>

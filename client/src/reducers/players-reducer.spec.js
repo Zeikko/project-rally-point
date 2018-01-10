@@ -14,8 +14,8 @@ describe('playersReducer', () => {
   it('updates players', () => {
     const nextState = playersReducer(undefined, {
       type: actions.GET_PLAYERS_SUCCESS,
-      data: [normalUser],
+      user: [normalUser],
     })
-    expect(nextState).toEqual({ data: [normalUser] })
+    expect(nextState).toEqual({ userState: [normalUser] })
   })
 })

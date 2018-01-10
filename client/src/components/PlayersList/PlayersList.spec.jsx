@@ -8,16 +8,16 @@ describe('PlayersList', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      game={{ data: game }}
-      players={{ data: [] }}
+      gameState={{ game }}
+      playersState={{ players: [] }}
     />)
   })
 
   it('renders a player correctly', () => {
     matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      game={{ data: game }}
-      players={{ data: [normalUser] }}
+      gameState={{ game }}
+      playersState={{ players: [normalUser] }}
     />)
   })
 })

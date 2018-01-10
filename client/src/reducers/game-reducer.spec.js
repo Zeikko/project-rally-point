@@ -16,6 +16,6 @@ describe('gameReducer', () => {
       type: actions.GET_GAME_SUCCESS,
       data: game,
     })
-    expect(nextState).toEqual({ data: game })
+    expect(nextState).toEqual({ gameState: game })
   })
 })

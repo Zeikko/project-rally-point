@@ -6,12 +6,12 @@ import game from '../../../../fixtures/game.json'
 
 describe('LeaveGameButton', () => {
   it('renders correctly', () => {
-    matchComponentToSnapshot(<LeaveGameButton dispatch={() => {}} game={{ data: game }} />)
+    matchComponentToSnapshot(<LeaveGameButton dispatch={() => {}} gameState={{ game }} />)
   })
 
   it('leaves a game', () => {
     const dispatch = jest.fn()
-    const wrapper = mount(<LeaveGameButton dispatch={dispatch} game={{ data: game }} />)
+    const wrapper = mount(<LeaveGameButton dispatch={dispatch} gameState={{ game }} />)
     wrapper.find('button').simulate('click')
     expect(dispatch.mock.calls[0]).toEqual([
       {

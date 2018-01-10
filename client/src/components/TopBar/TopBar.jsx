@@ -5,18 +5,18 @@ import LoginStatus from '../LoginStatus/LoginStatus'
 import * as propTypes from '../../constants/prop-types'
 
 function TopBar(props) {
-  const { dispatch, user } = props
+  const { dispatch, userState } = props
   return (
     <Bar>
       <Heading>Project Rally Point</Heading>
-      <LoginStatus dispatch={dispatch} user={user} />
+      <LoginStatus dispatch={dispatch} userState={userState} />
     </Bar>
   )
 }
 
 TopBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: propTypes.user.isRequired,
+  userState: propTypes.userState.isRequired,
 }
 
 export default TopBar
