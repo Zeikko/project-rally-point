@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 import { server } from './app'
 import handleGame, { getGameRequest } from './socket/game'
 import handlePlayer, { getPlayersRequest } from './socket/player'
-import handleCaptainVote from './socket/captain-vote'
+import handleCaptainVote, { getCaptainVotes } from './socket/captain-vote'
 import sessionStore from './session-store'
 import config from './config'
 
@@ -21,6 +21,7 @@ io.attach(server)
 io.on('connection', async (socket) => {
   const game = await getGameRequest(io, socket)
   getPlayersRequest(io, socket, game.id)
+  getCaptainVotes(io, socket, game.id)
   socket.on('action', (action) => {
     socket.userId = getUserId(action, socket) // eslint-disable-line no-param-reassign
     handleGame(io, socket, action)

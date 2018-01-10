@@ -32,5 +32,4 @@ describe('Game', () => {
       userState={{ isLoading: false, user: normalUser }}
     />)
   })
-
 })

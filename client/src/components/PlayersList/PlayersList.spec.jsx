@@ -10,6 +10,8 @@ describe('PlayersList', () => {
       dispatch={() => {}}
       gameState={{ game }}
       playersState={{ players: [] }}
+      captainVotesState={{ captainVotes: [] }}
+      userState={{ isLoading: false, user: null }}
     />)
   })
 
@@ -18,6 +20,8 @@ describe('PlayersList', () => {
       dispatch={() => {}}
       gameState={{ game }}
       playersState={{ players: [normalUser] }}
+      captainVotesState={{ captainVotes: [] }}
+      userState={{ isLoading: false, user: null }}
     />)
   })
 })

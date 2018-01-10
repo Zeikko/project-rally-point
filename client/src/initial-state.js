@@ -9,7 +9,7 @@ export default {
   playersState: {
     players: [],
   },
-  captainVoteState: {
-    captainVotes: []
-  }
+  captainVotesState: {
+    captainVotes: [],
+  },
 }

@@ -13,13 +13,25 @@ function App(props) {
     userState,
     gameState,
     playersState,
+    captainVotesState,
   } = props
   return (
     <div>
       <TopBar userState={userState} dispatch={dispatch} />
       <AdminPanel gameState={gameState} userState={userState} dispatch={dispatch} />
-      <Game playersState={playersState} gameState={gameState} userState={userState} dispatch={dispatch} />
-      {gameState.game && <PlayersList playersState={playersState} gameState={gameState} dispatch={dispatch} />}
+      <Game
+        playersState={playersState}
+        gameState={gameState}
+        userState={userState}
+        dispatch={dispatch}
+      />
+      {gameState.game && <PlayersList
+        playersState={playersState}
+        gameState={gameState}
+        captainVotesState={captainVotesState}
+        userState={userState}
+        dispatch={dispatch}
+      />}
     </div>
   )
 }
@@ -29,10 +41,12 @@ const mapStateToProps = ({
   userState,
   gameState,
   playersState,
+  captainVotesState,
 }) => ({
   userState,
   gameState,
   playersState,
+  captainVotesState,
 })
 
 App.propTypes = {
@@ -40,6 +54,7 @@ App.propTypes = {
   userState: propTypes.userState.isRequired,
   gameState: propTypes.gameState.isRequired,
   playersState: propTypes.playersState.isRequired,
+  captainVotesState: propTypes.captainVotesState.isRequired,
 }
 
 export { App as AppWithoutConnect }

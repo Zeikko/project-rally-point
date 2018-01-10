@@ -12,7 +12,7 @@ describe('gameHandler', () => {
   it('does nothing for non matching action', async () => {
     const io = { emit: jest.fn() }
     const socket = { emit: jest.fn() }
-    await handleGame(io, socket, {
+    return handleGame(io, socket, {
       type: 'non matching action type',
     })
   })

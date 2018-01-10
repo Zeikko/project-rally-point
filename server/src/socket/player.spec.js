@@ -4,7 +4,7 @@ import { migrateLatest, migrateRollback } from '../test/db'
 import normalUserFixture from '../../../fixtures/normal-user.json'
 import handlePlayer from './player'
 import actions from '../../../common/actions.json'
-import gameStatuses from '../../../common/game-statuses'
+import gameStatuses from '../../../common/game-statuses.json'
 
 timekeeper.freeze(new Date(1))
 

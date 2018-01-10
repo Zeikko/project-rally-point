@@ -1,24 +1,22 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { matchComponentToSnapshot } from '../../../test/snapshot'
-import SimulateQueueEmpty from './SimulateQueueEmpty'
+import CreateGameButton from './CreateGameButton'
 import game from '../../../../../fixtures/game.json'
 
-describe('SimulateQueueEmpty', () => {
+describe('CreateGameButton', () => {
   it('renders correctly', () => {
-    matchComponentToSnapshot(<SimulateQueueEmpty dispatch={() => {}} gameState={{ game }} />)
+    matchComponentToSnapshot(<CreateGameButton dispatch={() => {}} />)
   })
 
-  it('leaves a game', () => {
+  it('creates a game', () => {
     const dispatch = jest.fn()
-    const wrapper = mount(<SimulateQueueEmpty dispatch={dispatch} gameState={{ game }} />)
+    const wrapper = mount(<CreateGameButton dispatch={dispatch} />)
     wrapper.find('button').simulate('click')
     expect(dispatch.mock.calls[0]).toEqual([
       {
-        type: 'LEAVE_GAME_REQUEST',
+        type: 'CREATE_GAME_REQUEST',
         socket: true,
-        gameId: 1,
-        userId: 1,
       },
     ])
   })

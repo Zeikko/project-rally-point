@@ -1,8 +1,8 @@
 import db from '../db'
 import actions from '../../../common/actions.json'
-import { startCaptainVote, getGameStatus, shouldStartCaptainVote, createNewGame } from '../helpers/game'
+import { startCaptainVote, getGameStatus, shouldStartCaptainVote } from '../helpers/game'
 import logger from '../logger'
-import gameStatuses from '../../../common/game-statuses'
+import gameStatuses from '../../../common/game-statuses.json'
 
 export default function handlePlayer(io, socket, action) {
   switch (action.type) {
@@ -12,8 +12,6 @@ export default function handlePlayer(io, socket, action) {
       return joinGameRequest(io, socket, action.gameId)
     case actions.LEAVE_GAME_REQUEST:
       return leaveGameRequest(io, socket, action.gameId)
-    case actions.VOTE_CAPTAIN_REQUEST:
-      return voteCaptainRequest(io, socket, action.gameId, action.playerId)
     default:
       return null
   }
@@ -43,12 +41,10 @@ async function joinGameRequest(io, socket, gameId) {
     await broadcastGamePlayersUpdate(io, gameId)
     const willStartCaptainVote = await shouldStartCaptainVote(gameId)
     if (willStartCaptainVote) {
-      await createNewGame()
       const game = await startCaptainVote(gameId)
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     }
   } catch (error) {
-    console.log(error)
     logger.error(error)
     socket.emit('action', { type: actions.JOIN_GAME_ERROR })
   }
@@ -76,7 +72,7 @@ async function leaveGameRequest(io, socket, gameId) {
 
 function getGamePlayers(gameId) {
   return db('player')
-    .select('user.*')
+    .select(['user.*', 'player.userId'])
     .leftJoin('user', 'player.userId', 'user.id')
     .where({ gameId })
 }

@@ -5,6 +5,8 @@ exports.up = knex => (
       table.enum('status', [
         'QUEUE',
         'VOTE_CAPTAINS',
+        'SQUAD_LEADER_PICK',
+        'PLAYING',
       ]).notNullable().defaultTo('QUEUE')
       table.integer('maxPlayers').notNullable().defaultTo(48)
     })

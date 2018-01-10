@@ -4,6 +4,8 @@ import React from 'react'
 import * as propTypes from '../../../constants/prop-types'
 import SimulateQueueFull from '../SimulateQueueFull/SimulateQueueFull'
 import SimulateQueueEmpty from '../SimulateQueueEmpty/SimulateQueueEmpty'
+import SimulateCaptainVotes from '../SimulateCaptainVotes/SimulateCaptainVotes'
+import CreateGameButton from '../CreateGameButton/CreateGameButton'
 
 function AdminPanel(props) {
   const {
@@ -16,6 +18,8 @@ function AdminPanel(props) {
     <div>
       <SimulateQueueFull gameState={gameState} dispatch={dispatch} />
       <SimulateQueueEmpty gameState={gameState} dispatch={dispatch} />
+      <SimulateCaptainVotes gameState={gameState} dispatch={dispatch} />
+      <CreateGameButton dispatch={dispatch} />
     </div>
   )
 }
