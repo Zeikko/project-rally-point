@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { voteCaptainAction } from '../../actions/player-actions'
+import { voteCaptainAction } from '../../actions/captain-vote-actions'
 import Button from '../Button/Button'
 import * as propTypes from '../../constants/prop-types'
 

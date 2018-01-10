@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { server } from './app'
 import handleGame, { getGameRequest } from './socket/game'
 import handlePlayer, { getPlayersRequest } from './socket/player'
+import handleCaptainVote from './socket/captain-vote'
 import sessionStore from './session-store'
 import config from './config'
 
@@ -24,6 +25,7 @@ io.on('connection', async (socket) => {
     socket.userId = getUserId(action, socket) // eslint-disable-line no-param-reassign
     handleGame(io, socket, action)
     handlePlayer(io, socket, action)
+    handleCaptainVote(io, socket, action)
   })
 })
 

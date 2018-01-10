@@ -40,7 +40,7 @@ async function joinGameRequest(io, socket, gameId) {
       userId: socket.userId,
     })
     socket.emit('action', { type: actions.JOIN_GAME_SUCCESS })
-    await broadcastGamePlayersUpdate(io, action.gameId)
+    await broadcastGamePlayersUpdate(io, gameId)
     const willStartCaptainVote = await shouldStartCaptainVote(gameId)
     if (willStartCaptainVote) {
       await createNewGame()
@@ -48,6 +48,7 @@ async function joinGameRequest(io, socket, gameId) {
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     }
   } catch (error) {
+    console.log(error)
     logger.error(error)
     socket.emit('action', { type: actions.JOIN_GAME_ERROR })
   }
@@ -70,34 +71,6 @@ async function leaveGameRequest(io, socket, gameId) {
   } catch (error) {
     logger.error(error)
     socket.emit('action', { type: actions.LEAVE_GAME_ERROR })
-  }
-}
-
-async function voteCaptainRequest(io, socket, gameId, playerId) {
-  try {
-    console.log(gameId)
-    const { status } = await getGameStatus(gameId)
-    if (status !== gameStatuses.VOTE_CAPTAINS) {
-      throw Error('Game is not in captain vote')
-    }
-    console.log(gameId, socket.userId, playerId)
-    await db('captainVote').insert({
-      gameId,
-      voterId: socket.userId,
-      votedId: playerId
-    })
-    socket.emit('action', { type: actions.VOTE_CAPTAIN_SUCCESS })
-    /*await broadcastGamePlayersUpdate(io, action.gameId)
-    const willStartCaptainVote = await shouldStartCaptainVote(gameId)
-    if (willStartCaptainVote) {
-      await createNewGame()
-      const game = await startCaptainVote(gameId)
-      io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
-    }*/
-  } catch (error) {
-    console.log(error)
-    logger.error(error)
-    socket.emit('action', { type: actions.VOTE_CAPTAIN_ERROR })
   }
 }
 
