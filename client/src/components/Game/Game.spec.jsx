@@ -9,15 +9,17 @@ describe('Game', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<Game
       dispatch={() => {}}
-      {...initialState}
-      userState={{ isLoading: false, user: null }}
+      gameState={initialState.gameState}
+      playersState={initialState.playersState}
+      userState={initialState.userState}
     />)
   })
 
   it('renders correctly when player is not in the game', () => {
     matchComponentToSnapshot(<Game
       dispatch={() => {}}
-      {...initialState}
+      gameState={{ game }}
+      playersState={initialState.playersState}
       userState={{ isLoading: false, user: normalUser }}
     />)
   })
@@ -25,7 +27,7 @@ describe('Game', () => {
   it('renders correctly when player is in the game', () => {
     matchComponentToSnapshot(<Game
       dispatch={() => {}}
-      gameState={{ game: game }}
+      gameState={{ game }}
       playersState={{ players: [normalUser] }}
       userState={{ isLoading: false, user: normalUser }}
     />)

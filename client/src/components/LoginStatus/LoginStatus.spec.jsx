@@ -8,7 +8,7 @@ describe('LoginStatus', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<LoginStatus
       dispatch={() => {}}
-      userState={initialState.user}
+      userState={initialState.userState}
     />)
   })
 
