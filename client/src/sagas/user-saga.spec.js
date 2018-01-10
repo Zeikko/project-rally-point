@@ -56,11 +56,11 @@ describe('UserSaga', () => {
     beforeEach(() => {
       sagaTester = new SagaTester({
         initialState: {
-          user: {
-            data: userFixture,
+          userState: {
+            user: userFixture,
           },
         },
-        reducers: { user: userReducer },
+        reducers: { userState: userReducer },
       })
     })
 
