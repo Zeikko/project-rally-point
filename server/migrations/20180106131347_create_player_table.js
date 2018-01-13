@@ -10,7 +10,7 @@ exports.up = knex => (
         'NONE',
         'CAPTAIN',
         'SQUAD_LEADER',
-        'SQUAD_MEMBER'
+        'SQUAD_MEMBER',
       ])
     })
     .then(() =>

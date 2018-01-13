@@ -56,7 +56,7 @@ export async function startSquadLeaderPick(gameId) {
 export async function startSquadMemberPick(gameId) {
   const games = await db('game')
     .update({
-      status: gameStatuses.SQUAD_MEMBER_PICK
+      status: gameStatuses.SQUAD_MEMBER_PICK,
     })
     .where({ id: gameId })
     .returning('*')
@@ -72,7 +72,7 @@ export function getGameStatus(gameId) {
 export async function passPlayerPickTurn(id, currentTeam) {
   const games = await db('game')
     .update({
-      teamWithTurnToPick: currentTeam === 1 ? 2 : 1
+      teamWithTurnToPick: currentTeam === 1 ? 2 : 1,
     })
     .where({ id })
     .returning('*')

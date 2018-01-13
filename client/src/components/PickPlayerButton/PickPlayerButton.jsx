@@ -19,18 +19,19 @@ class PickPlayerButton extends Component {
   }
 
   render() {
-    const {
-      player, game, players, user,
-    } = this.props
+    const { game, players, user } = this.props
     const userPlayer = _.find(players, { id: user.id })
     const canPickSquadLeader = game.status === gameStatuses.SQUAD_LEADER_PICK
       && _.get(userPlayer, 'role') === playerRoles.CAPTAIN
       && game.teamWithTurnToPick === userPlayer.team
     if (canPickSquadLeader) {
-      const numberOfSquadLeadersInTeam = _.filter(players, { team: userPlayer.team, role: playerRoles.SQUAD_LEADER }).length
+      const numberOfSquadLeadersInTeam = _.filter(players, {
+        team: userPlayer.team,
+        role: playerRoles.SQUAD_LEADER,
+      }).length
       const squad = numberOfSquadLeadersInTeam + 2
       return (
-        <Button onClick={() => { this.handleClick(squad, playerRoles.SQUAD_LEADER) } }>
+        <Button onClick={() => { this.handleClick(squad, playerRoles.SQUAD_LEADER) }}>
           Pick
         </Button>
       )

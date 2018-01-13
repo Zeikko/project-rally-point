@@ -6,7 +6,7 @@ import {
   shouldStartCaptainVote,
   passPlayerPickTurn,
   shouldStartSquadMemberPick,
-  startSquadMemberPick
+  startSquadMemberPick,
 } from '../helpers/game'
 import { getGamePlayers } from '../helpers/player'
 import logger from '../logger'
@@ -21,7 +21,15 @@ export default function handlePlayer(io, socket, action) {
     case actions.LEAVE_GAME_REQUEST:
       return leaveGameRequest(io, socket, action.gameId)
     case actions.PICK_PLAYER_REQUEST:
-      return pickPlayerRequest(io, socket, action.gameId, action.userId, action.team, action.squad, action.role)
+      return pickPlayerRequest(
+        io,
+        socket,
+        action.gameId,
+        action.userId,
+        action.team,
+        action.squad,
+        action.role,
+      )
     default:
       return null
   }
@@ -91,11 +99,11 @@ async function pickPlayerRequest(io, socket, gameId, userId, team, squad, role) 
       .update({
         team,
         squad,
-        role
+        role,
       })
       .where({
         gameId,
-        userId
+        userId,
       })
     let game = await passPlayerPickTurn(gameId, team)
     socket.emit('action', { type: actions.PICK_PLAYER_SUCCESS })

@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import styled from 'styled-components'
 import * as propTypes from '../../constants/prop-types'
 
 function Player(props) {

@@ -8,7 +8,7 @@ export const logoutAction = () => ({
   type: actions.LOGOUT_REQUEST,
 })
 
-export const simulateUserAction = (id) => ({
+export const simulateUserAction = id => ({
   type: actions.SIMULATE_USER,
-  id
+  id,
 })

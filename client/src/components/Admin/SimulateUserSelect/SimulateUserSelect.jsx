@@ -1,9 +1,6 @@
-import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { simulateUserAction } from '../../../actions/user-actions'
-import Button from '../../Button/Button'
-import * as propTypes from '../../../constants/prop-types'
 
 class SimulateUserSelect extends Component {
   constructor() {
@@ -21,15 +18,14 @@ class SimulateUserSelect extends Component {
     for (let id = 1; id <= 48; id += 1) {
       simulatedUserIds = [
         ...simulatedUserIds,
-        id
+        id,
       ]
     }
     return (
       <div>
-        <select onChange={(event) => this.handleChange(event)}>
-          {simulatedUserIds.map((id) =>
-            <option key={id} value={id}>Test user {id}</option>
-          )}
+        <select onChange={event => this.handleChange(event)}>
+          {simulatedUserIds.map(id =>
+            <option key={id} value={id}>Test user {id}</option>)}
         </select>
       </div>
     )

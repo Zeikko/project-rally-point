@@ -126,10 +126,11 @@ describe('gameHandler', () => {
         { userId: 2, gameId: game.id },
       ])
       await db('captainVote').insert([
-        { gameId: game.id,
+        {
+          gameId: game.id,
           votedId: 1,
           voterId: 2,
-        }
+        },
       ])
       await handleCaptainVote(io, socket, {
         type: actions.CAPTAIN_VOTE_REQUEST,

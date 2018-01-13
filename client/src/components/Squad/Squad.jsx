@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 import * as propTypes from '../../constants/prop-types'
-import VoteCaptainButton from '../VoteCaptainButton/VoteCaptainButton'
 import Player from '../Player/Player'
 
 function Squad(props) {

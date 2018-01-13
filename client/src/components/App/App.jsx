@@ -18,8 +18,7 @@ function App(props) {
     gameState: { game },
     playersState,
     playersState: { players },
-    captainVotesState,
-    captainVotesState: { captainVotes },
+    captainVotesState: { captainVotes },
   } = props
   return (
     <div>
@@ -31,23 +30,25 @@ function App(props) {
         userState={userState}
         dispatch={dispatch}
       />
-      {gameState.game && <PlayerLists>
-        <Team
-          players={players}
-          team={1}
-        />
-        <UnpickedPlayerList
-          players={players}
-          game={game}
-          captainVotes={captainVotes}
-          user={user}
-          dispatch={dispatch}
-        />
-        <Team
-          players={players}
-          team={2}
-        />
-      </PlayerLists>}
+      {gameState.game &&
+        <PlayerLists>
+          <Team
+            players={players}
+            team={1}
+          />
+          <UnpickedPlayerList
+            players={players}
+            game={game}
+            captainVotes={captainVotes}
+            user={user}
+            dispatch={dispatch}
+          />
+          <Team
+            players={players}
+            team={2}
+          />
+        </PlayerLists>
+      }
     </div>
   )
 }

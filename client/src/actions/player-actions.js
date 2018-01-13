@@ -21,5 +21,5 @@ export const pickPlayerAction = (gameId, userId, team, squad, role) => ({
   userId,
   team,
   squad,
-  role
+  role,
 })
