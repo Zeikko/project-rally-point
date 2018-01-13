@@ -2,7 +2,6 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { matchComponentToSnapshot } from '../../../test/snapshot'
 import CreateGameButton from './CreateGameButton'
-import game from '../../../../../fixtures/game.json'
 
 describe('CreateGameButton', () => {
   it('renders correctly', () => {

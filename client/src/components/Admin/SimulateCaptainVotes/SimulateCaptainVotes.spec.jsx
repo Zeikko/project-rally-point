@@ -19,7 +19,7 @@ describe('SimulateCaptainVotes', () => {
         socket: true,
         gameId: 1,
         userId: 1,
-        playerId: expect.stringMatching(/\d{1,2}/)
+        playerId: expect.stringMatching(/\d{1,2}/),
       },
     ])
   })
