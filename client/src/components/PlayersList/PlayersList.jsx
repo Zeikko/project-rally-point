@@ -1,38 +1,42 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { getPlayersAction } from '../../actions/player-actions'
 import * as propTypes from '../../constants/prop-types'
+import VoteCaptainButton from '../VoteCaptainButton/VoteCaptainButton'
 
-class PlayersList extends Component {
-  componentDidMount() {
-    const { dispatch, game } = this.props
-    dispatch(getPlayersAction(game.data.id))
+function PlayersList(props) {
+  const {
+    playersState, gameState, captainVotesState, userState, dispatch,
+  } = props
+  if (!playersState.players.length) {
+    return null
   }
-
-  render() {
-    const { players } = this.props
-    if (!players.data.length) {
-      return null
-    }
-    return (
-      <div>
-        <Heading>Players waiting for a game</Heading>
-        {players.data.map(player => (
-          <div key={player.id}>
-            <img alt={player.displayName} src={player.smallAvatarUrl} />
-            {player.displayName} ({player.country})
-          </div>
-        ))}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Heading>Players waiting for a game</Heading>
+      {playersState.players.map(player => (
+        <div key={player.id}>
+          <img alt={player.displayName} src={player.smallAvatarUrl} />
+          {player.displayName} ({player.country})
+          <VoteCaptainButton
+            dispatch={dispatch}
+            player={player}
+            gameState={gameState}
+            captainVotesState={captainVotesState}
+            userState={userState}
+          />
+        </div>
+      ))}
+    </div>
+  )
 }
 
 PlayersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  game: propTypes.game.isRequired,
-  players: propTypes.players.isRequired,
+  gameState: propTypes.gameState.isRequired,
+  playersState: propTypes.playersState.isRequired,
+  captainVotesState: propTypes.captainVotesState.isRequired,
+  userState: propTypes.userState.isRequired,
 }
 
 export default PlayersList

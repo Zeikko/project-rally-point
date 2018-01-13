@@ -8,10 +8,17 @@ const logger = winston.createLogger({
   ],
 })
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production' && process.env.APP_ENV !== 'unit-test') {
   logger.add(new winston.transports.Console({
     format: winston.format.simple(),
   }))
+}
+
+logger.exception = (exception) => {
+  const { message } = winston.exceptions.getAllInfo(exception)
+  logger.error({
+    message,
+  })
 }
 
 export default logger

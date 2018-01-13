@@ -21,6 +21,18 @@ exports[`AdminPanel renders correctly admin user 1`] = `
   >
     Simulate Queue Empty
   </button>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Simulate Captain Votes
+  </button>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Create New Game
+  </button>
 </div>
 `;
 

@@ -24,5 +24,5 @@ function configureStore() {
 }
 
 const store = configureStore()
-store.dispatch({ type: 'socket/hello', data: 'Hello!' })
+
 export default store

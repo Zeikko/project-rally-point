@@ -10,7 +10,13 @@ exports[`Game renders correctly when player is in the game 1`] = `
 
 <div>
   <div>
-    queue
+    QUEUE
+  </div>
+  <div>
+    Players: 
+    1
+     / 
+    48
   </div>
   <button
     className="c0"
@@ -31,7 +37,13 @@ exports[`Game renders correctly when player is not in the game 1`] = `
 
 <div>
   <div>
-    queue
+    QUEUE
+  </div>
+  <div>
+    Players: 
+    0
+     / 
+    48
   </div>
   <button
     className="c0"

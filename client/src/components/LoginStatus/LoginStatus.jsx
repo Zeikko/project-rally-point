@@ -13,15 +13,15 @@ class LoginStatus extends Component {
   }
 
   render() {
-    const { user, dispatch } = this.props
-    if (user.isLoading) {
+    const { userState, dispatch } = this.props
+    if (userState.isLoading) {
       return null
     }
-    if (user.data) {
+    if (userState.user) {
       return (
         <Wrapper>
-          <Avatar alt={user.data.displayName} src={user.data.smallAvatarUrl} />
-          <DisplayName>{user.data.displayName}</DisplayName>
+          <Avatar alt={userState.user.displayName} src={userState.user.smallAvatarUrl} />
+          <DisplayName>{userState.user.displayName}</DisplayName>
           <LogoutButton dispatch={dispatch} />
         </Wrapper>
       )
@@ -32,7 +32,7 @@ class LoginStatus extends Component {
 
 LoginStatus.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: propTypes.user.isRequired,
+  userState: propTypes.userState.isRequired,
 }
 
 export default LoginStatus

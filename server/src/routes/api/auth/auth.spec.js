@@ -3,17 +3,14 @@ import passportStub from 'passport-stub'
 import { matchBodyToSnapshot } from '../../../test/snapshot'
 import app from '../../../app'
 import db from '../../../db'
-import { migrateLatest, migrateRollback } from '../../../test/db'
 import normalUserFixture from '../../../../../fixtures/normal-user.json'
 
 passportStub.install(app)
 const request = supertest(app)
 
 describe('/api/auth', () => {
-  beforeEach(() => migrateLatest()
-    .then(() => db('user').insert([normalUserFixture])))
+  beforeEach(() => db('user').insert([normalUserFixture]))
 
-  afterEach(() => migrateRollback())
 
   afterEach((done) => {
     passportStub.logout()

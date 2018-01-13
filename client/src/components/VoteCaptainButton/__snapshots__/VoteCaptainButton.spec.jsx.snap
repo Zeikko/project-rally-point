@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VoteCaptainButton does not render when not voting for a captain 1`] = `null`;
+
+exports[`VoteCaptainButton renders button when voting for a captain 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+>
+  Vote
+</button>
+`;
+
+exports[`VoteCaptainButton renders number of votes when already for a captain 1`] = `
+<span>
+  1
+</span>
+`;

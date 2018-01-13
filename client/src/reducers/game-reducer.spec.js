@@ -8,7 +8,7 @@ describe('gameReducer', () => {
     const nextState = gameReducer(undefined, {
       type: 'irrelevant action',
     })
-    expect(nextState).toEqual(initialState.game)
+    expect(nextState).toEqual(initialState.gameState)
   })
 
   it('updates game', () => {
@@ -16,6 +16,6 @@ describe('gameReducer', () => {
       type: actions.GET_GAME_SUCCESS,
       data: game,
     })
-    expect(nextState).toEqual({ data: game })
+    expect(nextState).toEqual({ game })
   })
 })

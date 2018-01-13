@@ -23,8 +23,8 @@ describe('UserSaga', () => {
   describe('initial state', () => {
     beforeEach(() => {
       sagaTester = new SagaTester({
-        initialState: { user: initialState.user },
-        reducers: { user: userReducer },
+        initialState: { userState: initialState.userState },
+        reducers: { userState: userReducer },
       })
     })
 
@@ -34,9 +34,9 @@ describe('UserSaga', () => {
       sagaTester.dispatch(getUserAction())
       await sagaTester.waitFor(actions.GET_USER_REQUEST)
       await sagaTester.waitFor(actions.GET_USER_SUCCESS)
-      expect(sagaTester.getState().user).toEqual({
+      expect(sagaTester.getState().userState).toEqual({
         isLoading: false,
-        data: userFixture,
+        user: userFixture,
       })
     })
 
@@ -45,9 +45,9 @@ describe('UserSaga', () => {
       fetchMock.get('/api/auth/loggedin', 500)
       sagaTester.dispatch(getUserAction())
       await sagaTester.waitFor(actions.GET_USER_ERROR)
-      expect(sagaTester.getState().user).toEqual({
+      expect(sagaTester.getState().userState).toEqual({
         isLoading: false,
-        data: null,
+        user: null,
       })
     })
   })
@@ -56,11 +56,11 @@ describe('UserSaga', () => {
     beforeEach(() => {
       sagaTester = new SagaTester({
         initialState: {
-          user: {
-            data: userFixture,
+          userState: {
+            user: userFixture,
           },
         },
-        reducers: { user: userReducer },
+        reducers: { userState: userReducer },
       })
     })
 
@@ -70,9 +70,9 @@ describe('UserSaga', () => {
       sagaTester.dispatch(logoutAction())
       await sagaTester.waitFor(actions.LOGOUT_REQUEST)
       await sagaTester.waitFor(actions.LOGOUT_SUCCESS)
-      expect(sagaTester.getState().user).toEqual({
+      expect(sagaTester.getState().userState).toEqual({
         isLoading: false,
-        data: null,
+        user: null,
       })
     })
 
@@ -81,9 +81,9 @@ describe('UserSaga', () => {
       fetchMock.post('/api/auth/logout', 500)
       sagaTester.dispatch(logoutAction())
       await sagaTester.waitFor(actions.LOGOUT_ERROR)
-      expect(sagaTester.getState().user).toEqual({
+      expect(sagaTester.getState().userState).toEqual({
         isLoading: false,
-        data: userFixture,
+        user: userFixture,
       })
     })
   })

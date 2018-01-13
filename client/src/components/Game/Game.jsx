@@ -7,18 +7,19 @@ import LeaveGameButton from '../LeaveGameButton/LeaveGameButton'
 
 function Game(props) {
   const {
-    dispatch, user, game, players,
+    dispatch, userState, gameState, playersState,
   } = props
-  if (!game.data) {
+  if (!gameState.game) {
     return null
   }
-  const isPlayerInGame = _.find(players.data, { id: _.get(user, 'data.id') })
+  const isPlayerInGame = _.find(playersState.players, { id: _.get(userState, 'user.id') })
   return (
     <div>
-      <div>{game.data.status}</div>
+      <div>{gameState.game.status}</div>
+      <div>Players: {playersState.players.length} / {gameState.game.maxPlayers}</div>
       {isPlayerInGame ?
-        <LeaveGameButton game={game} user={user} dispatch={dispatch} /> :
-        <JoinGameButton game={game} user={user} dispatch={dispatch} />
+        <LeaveGameButton gameState={gameState} userState={userState} dispatch={dispatch} /> :
+        <JoinGameButton gameState={gameState} userState={userState} dispatch={dispatch} />
       }
     </div>
   )
@@ -26,9 +27,9 @@ function Game(props) {
 
 Game.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: propTypes.user.isRequired,
-  game: propTypes.game.isRequired,
-  players: propTypes.players.isRequired,
+  userState: propTypes.userState.isRequired,
+  gameState: propTypes.gameState.isRequired,
+  playersState: propTypes.playersState.isRequired,
 }
 
 export default Game

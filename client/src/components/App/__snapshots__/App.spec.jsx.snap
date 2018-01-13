@@ -52,7 +52,13 @@ exports[`App renders correctly with game 1`] = `
   </div>
   <div>
     <div>
-      queue
+      QUEUE
+    </div>
+    <div>
+      Players: 
+      0
+       / 
+      48
     </div>
     <button
       className="c2"

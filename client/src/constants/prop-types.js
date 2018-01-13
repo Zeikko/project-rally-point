@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-const userData = PropTypes.shape({
+export const user = PropTypes.shape({
   country: PropTypes.string,
   displayName: PropTypes.string.isRequired,
   fullAvatarUrl: PropTypes.string,
@@ -13,18 +13,27 @@ const userData = PropTypes.shape({
   role: PropTypes.string.isRequired,
 })
 
-export const user = PropTypes.shape({
+export const userState = PropTypes.shape({
   isLoading: PropTypes.bool.isRequired,
-  data: userData,
+  user,
 })
 
-export const game = PropTypes.shape({
-  data: PropTypes.shape({
+export const gameState = PropTypes.shape({
+  game: PropTypes.shape({
     id: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
   }),
 })
 
-export const players = PropTypes.shape({
-  data: PropTypes.arrayOf(userData),
+export const playersState = PropTypes.shape({
+  players: PropTypes.arrayOf(user),
+})
+
+export const captainVotesState = PropTypes.shape({
+  captainVotes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    gameId: PropTypes.number.isRequired,
+    voterId: PropTypes.number.isRequired,
+    votedId: PropTypes.number.isRequired,
+  })),
 })

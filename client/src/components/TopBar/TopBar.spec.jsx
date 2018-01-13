@@ -7,7 +7,7 @@ describe('TopBar', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<TopBar
       dispatch={() => {}}
-      user={initialState.user}
+      userState={initialState.userState}
     />)
   })
 })

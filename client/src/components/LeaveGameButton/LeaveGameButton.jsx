@@ -11,8 +11,8 @@ class LogoutButton extends Component {
   }
 
   handleClick() {
-    const { dispatch, game } = this.props
-    dispatch(leaveGameAction(game.data.id))
+    const { dispatch, gameState } = this.props
+    dispatch(leaveGameAction(gameState.game.id))
   }
 
   render() {
@@ -26,7 +26,7 @@ class LogoutButton extends Component {
 
 LogoutButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  game: propTypes.game.isRequired,
+  gameState: propTypes.gameState.isRequired,
 }
 
 export default LogoutButton

@@ -10,36 +10,51 @@ import AdminPanel from '../Admin/AdminPanel/AdminPanel'
 function App(props) {
   const {
     dispatch,
-    user,
-    game,
-    players,
+    userState,
+    gameState,
+    playersState,
+    captainVotesState,
   } = props
   return (
     <div>
-      <TopBar user={user} dispatch={dispatch} />
-      <AdminPanel game={game} user={user} dispatch={dispatch} />
-      <Game players={players} game={game} user={user} dispatch={dispatch} />
-      {game.data && <PlayersList players={players} game={game} dispatch={dispatch} />}
+      <TopBar userState={userState} dispatch={dispatch} />
+      <AdminPanel gameState={gameState} userState={userState} dispatch={dispatch} />
+      <Game
+        playersState={playersState}
+        gameState={gameState}
+        userState={userState}
+        dispatch={dispatch}
+      />
+      {gameState.game && <PlayersList
+        playersState={playersState}
+        gameState={gameState}
+        captainVotesState={captainVotesState}
+        userState={userState}
+        dispatch={dispatch}
+      />}
     </div>
   )
 }
 
 /* istanbul ignore next */
 const mapStateToProps = ({
-  user,
-  game,
-  players,
+  userState,
+  gameState,
+  playersState,
+  captainVotesState,
 }) => ({
-  user,
-  game,
-  players,
+  userState,
+  gameState,
+  playersState,
+  captainVotesState,
 })
 
 App.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  user: propTypes.user.isRequired,
-  game: propTypes.game.isRequired,
-  players: propTypes.players.isRequired,
+  userState: propTypes.userState.isRequired,
+  gameState: propTypes.gameState.isRequired,
+  playersState: propTypes.playersState.isRequired,
+  captainVotesState: propTypes.captainVotesState.isRequired,
 }
 
 export { App as AppWithoutConnect }

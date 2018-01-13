@@ -8,16 +8,20 @@ describe('PlayersList', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      game={{ data: game }}
-      players={{ data: [] }}
+      gameState={{ game }}
+      playersState={{ players: [] }}
+      captainVotesState={{ captainVotes: [] }}
+      userState={{ isLoading: false, user: null }}
     />)
   })
 
   it('renders a player correctly', () => {
     matchComponentToSnapshot(<PlayersList
       dispatch={() => {}}
-      game={{ data: game }}
-      players={{ data: [normalUser] }}
+      gameState={{ game }}
+      playersState={{ players: [normalUser] }}
+      captainVotesState={{ captainVotes: [] }}
+      userState={{ isLoading: false, user: null }}
     />)
   })
 })
