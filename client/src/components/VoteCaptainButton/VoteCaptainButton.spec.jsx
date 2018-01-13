@@ -54,7 +54,11 @@ describe('VoteCaptainButton', () => {
       dispatch={() => {}}
       player={normalUser}
       gameState={{ game: { ...game, status: gameStatuses.VOTE_CAPTAINS } }}
-      captainVotesState={{ captainVotes: [{ id: 1, gameId: game.id, voterId: normalUser.id, votedId: normalUser.id }]}}
+      captainVotesState={{
+        captainVotes: [{
+ id: 1, gameId: game.id, voterId: normalUser.id, votedId: normalUser.id,
+}],
+      }}
       userState={{ isLoading: false, user: normalUser }}
     />)
   })
