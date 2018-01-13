@@ -5,6 +5,7 @@ import TopBar from '../TopBar/TopBar'
 import * as propTypes from '../../constants/prop-types'
 import PlayersList from '../PlayersList/PlayersList'
 import Game from '../Game/Game'
+import AdminPanel from '../Admin/AdminPanel/AdminPanel'
 
 function App(props) {
   const {
@@ -16,6 +17,7 @@ function App(props) {
   return (
     <div>
       <TopBar user={user} dispatch={dispatch} />
+      <AdminPanel game={game} user={user} dispatch={dispatch} />
       <Game players={players} game={game} user={user} dispatch={dispatch} />
       {game.data && <PlayersList players={players} game={game} dispatch={dispatch} />}
     </div>

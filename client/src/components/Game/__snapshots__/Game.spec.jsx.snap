@@ -8,12 +8,17 @@ exports[`Game renders correctly when player is in the game 1`] = `
   cursor: pointer;
 }
 
-<button
-  className="c0"
-  onClick={[Function]}
->
-  Leave Game
-</button>
+<div>
+  <div>
+    queue
+  </div>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Leave Game
+  </button>
+</div>
 `;
 
 exports[`Game renders correctly when player is not in the game 1`] = `
@@ -24,12 +29,17 @@ exports[`Game renders correctly when player is not in the game 1`] = `
   cursor: pointer;
 }
 
-<button
-  className="c0"
-  onClick={[Function]}
->
-  Join Game
-</button>
+<div>
+  <div>
+    queue
+  </div>
+  <button
+    className="c0"
+    onClick={[Function]}
+  >
+    Join Game
+  </button>
+</div>
 `;
 
 exports[`Game renders initial state correctly 1`] = `null`;

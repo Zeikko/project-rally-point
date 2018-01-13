@@ -1,5 +1,5 @@
 {
-  "id": 49,
+  "id": 50,
   "steamId": "1",
   "displayName": "Test user",
   "profileUrl": "http://profile.test/user",
@@ -8,5 +8,5 @@
   "fullAvatarUrl": "http://avatar.test/full.jpg",
   "primaryClanId": "100",
   "country": "FI",
-  "role": "user"
+  "role": "admin"
 }

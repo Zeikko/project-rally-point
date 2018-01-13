@@ -50,12 +50,17 @@ exports[`App renders correctly with game 1`] = `
       />
     </a>
   </div>
-  <button
-    className="c2"
-    onClick={[Function]}
-  >
-    Join Game
-  </button>
+  <div>
+    <div>
+      queue
+    </div>
+    <button
+      className="c2"
+      onClick={[Function]}
+    >
+      Join Game
+    </button>
+  </div>
 </div>
 `;
 

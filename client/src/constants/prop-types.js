@@ -10,6 +10,7 @@ const userData = PropTypes.shape({
   profileUrl: PropTypes.string.isRequired,
   smallAvatarUrl: PropTypes.string,
   steamId: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 })
 
 export const user = PropTypes.shape({

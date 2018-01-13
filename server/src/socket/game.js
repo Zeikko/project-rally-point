@@ -1,3 +1,4 @@
+import logger from '../logger'
 import db from '../db'
 import actions from '../../../common/actions.json'
 
@@ -10,17 +11,16 @@ export default function handleGame(io, socket, action) {
   }
 }
 
-export function getGameRequest(io, socket) {
-  return db('game')
-    .first('*')
-    .where({
-      status: 'queue',
-    })
-    .then(game => socket.emit('action', {
-      type: actions.GET_GAME_SUCCESS,
-      data: game,
-    }))
-    .catch(() => socket.emit('action', {
-      type: actions.GET_GAME_ERROR,
-    }))
+export async function getGameRequest(io, socket) {
+  try {
+    const game = await db('game')
+      .first('*')
+      .where({
+        status: 'queue',
+      })
+    socket.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
+  } catch (error) {
+    logger.error(error)
+    socket.emit('action', { type: actions.GET_GAME_ERROR })
+  }
 }
