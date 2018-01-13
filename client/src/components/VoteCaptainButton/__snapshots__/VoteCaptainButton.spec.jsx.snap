@@ -17,3 +17,9 @@ exports[`VoteCaptainButton renders button when voting for a captain 1`] = `
   Vote
 </button>
 `;
+
+exports[`VoteCaptainButton renders number of votes when already for a captain 1`] = `
+<span>
+  1
+</span>
+`;

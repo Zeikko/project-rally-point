@@ -26,7 +26,7 @@ class VoteCaptainButton extends Component {
     }
     const userHasVoted = _.find(captainVotesState.captainVotes, { voterId: userState.user.id })
     if (userHasVoted) {
-      const votes = _.filter(captainVotesState.captainVotes, { votedId: player.userId }).length
+      const votes = _.filter(captainVotesState.captainVotes, { votedId: player.id }).length
       return <span>{ votes }</span>
     }
     return (
