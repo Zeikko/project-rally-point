@@ -1,17 +1,10 @@
-import timekeeper from 'timekeeper'
 import db from '../db'
-import { migrateLatest, migrateRollback } from '../test/db'
 import normalUserFixture from '../../../fixtures/normal-user.json'
 import handlePlayer from './player'
 import actions from '../../../common/actions.json'
 import gameStatuses from '../../../common/game-statuses.json'
 
-timekeeper.freeze(new Date(1))
-
 describe('playerHandler', () => {
-  beforeEach(() => migrateLatest())
-  afterEach(() => migrateRollback())
-
   it('does nothing for non matching action', async () => {
     const io = { emit: jest.fn() }
     const socket = { emit: jest.fn() }

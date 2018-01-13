@@ -22,7 +22,7 @@ export async function getPlayersRequest(io, socket, gameId) {
     const players = await getGamePlayers(gameId)
     socket.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
   } catch (error) {
-    logger.error(error)
+    logger.exception(error)
     socket.emit('action', { type: actions.GET_PLAYERS_ERROR })
   }
 }
@@ -45,7 +45,7 @@ async function joinGameRequest(io, socket, gameId) {
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     }
   } catch (error) {
-    logger.error(error)
+    logger.exception(error)
     socket.emit('action', { type: actions.JOIN_GAME_ERROR })
   }
 }
@@ -65,14 +65,14 @@ async function leaveGameRequest(io, socket, gameId) {
     socket.emit('action', { type: actions.LEAVE_GAME_SUCCESS })
     await broadcastGamePlayersUpdate(io, gameId)
   } catch (error) {
-    logger.error(error)
+    logger.exception(error)
     socket.emit('action', { type: actions.LEAVE_GAME_ERROR })
   }
 }
 
 function getGamePlayers(gameId) {
   return db('player')
-    .select(['user.*', 'player.userId'])
+    .select(['user.*'])
     .leftJoin('user', 'player.userId', 'user.id')
     .where({ gameId })
 }

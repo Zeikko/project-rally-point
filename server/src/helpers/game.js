@@ -38,10 +38,6 @@ export async function startSquadLeaderPick(gameId) {
   return _.first(games)
 }
 
-export function createNewGame() {
-  return db('game').insert({})
-}
-
 export function getGameStatus(gameId) {
   return db('game')
     .first('status')

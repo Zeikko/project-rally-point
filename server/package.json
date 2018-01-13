@@ -43,6 +43,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./src/test/cleaner.js",
     "coveragePathIgnorePatterns": [
       "app.js",
       "passport.js",

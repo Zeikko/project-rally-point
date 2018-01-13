@@ -21,7 +21,7 @@ export async function getGameRequest(io, socket) {
     socket.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
     return game
   } catch (error) {
-    logger.error(error)
+    logger.exception(error)
     socket.emit('action', { type: actions.GET_GAME_ERROR })
   }
   return null
@@ -34,7 +34,7 @@ async function createGameRequest(io, socket) {
       .returning('*')
     socket.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
   } catch (error) {
-    logger.error(error)
-    socket.emit('action', { type: actions.GET_GAME_ERROR })
+    logger.exception(error)
+    socket.emit('action', { type: actions.CREATE_GAME_ERROR })
   }
 }
