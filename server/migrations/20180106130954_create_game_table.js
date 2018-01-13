@@ -7,8 +7,10 @@ exports.up = knex => (
         'VOTE_CAPTAINS',
         'SQUAD_LEADER_PICK',
         'PLAYING',
+        'SQUAD_MEMBER_PICK'
       ]).notNullable().defaultTo('QUEUE')
       table.integer('maxPlayers').notNullable().defaultTo(48)
+      table.integer('teamWithTurnToPick')
     })
     .then(() =>
       knex('game').insert({}))

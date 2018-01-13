@@ -6,6 +6,7 @@ import SimulateQueueFull from '../SimulateQueueFull/SimulateQueueFull'
 import SimulateQueueEmpty from '../SimulateQueueEmpty/SimulateQueueEmpty'
 import SimulateCaptainVotes from '../SimulateCaptainVotes/SimulateCaptainVotes'
 import CreateGameButton from '../CreateGameButton/CreateGameButton'
+import SimulateUserSelect from '../SimulateUserSelect/SimulateUserSelect'
 
 function AdminPanel(props) {
   const {
@@ -16,6 +17,7 @@ function AdminPanel(props) {
   }
   return (
     <div>
+      <SimulateUserSelect dispatch={dispatch} />
       <SimulateQueueFull gameState={gameState} dispatch={dispatch} />
       <SimulateQueueEmpty gameState={gameState} dispatch={dispatch} />
       <SimulateCaptainVotes gameState={gameState} dispatch={dispatch} />

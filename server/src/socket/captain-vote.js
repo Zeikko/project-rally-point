@@ -3,7 +3,8 @@ import db from '../db'
 import actions from '../../../common/actions.json'
 import { startSquadLeaderPick, getGameStatus, shouldStartSquadLeaderPick } from '../helpers/game'
 import gameStatuses from '../../../common/game-statuses.json'
-import { getIsPlayerInGame } from '../helpers/player'
+import { getIsPlayerInGame, pickPlayer, getGamePlayers } from '../helpers/player'
+import playerRoles from '../../../common/player-roles.json'
 
 export default function handleCaptainVote(io, socket, action) {
   switch (action.type) {
@@ -51,8 +52,17 @@ async function captainVoteRequest(io, socket, gameId, votedUserId) {
     await broadcastCaptainVotesUpdate(io, gameId)
     const willStartSquadLeaderPick = await shouldStartSquadLeaderPick(gameId)
     if (willStartSquadLeaderPick) {
+      const { 0: { votedId: teamOneCaptainId }, 1: { votedId: teamTwoCaptainId } } = await db('captainVote')
+        .select('votedId')
+        .where({ gameId })
+        .orderByRaw('COUNT("votedId") desc')
+        .groupBy('votedId')
+      await pickPlayer(gameId, teamOneCaptainId, 1, 1, playerRoles.CAPTAIN)
+      await pickPlayer(gameId, teamTwoCaptainId, 2, 1, playerRoles.CAPTAIN)
       const game = await startSquadLeaderPick(gameId)
       io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
+      const players = await getGamePlayers(gameId)
+      io.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
     }
   } catch (error) {
     logger.exception(error)

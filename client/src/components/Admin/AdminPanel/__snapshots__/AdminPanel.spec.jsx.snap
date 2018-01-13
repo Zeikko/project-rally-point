@@ -9,6 +9,300 @@ exports[`AdminPanel renders correctly admin user 1`] = `
 }
 
 <div>
+  <div>
+    <select
+      onChange={[Function]}
+    >
+      <option
+        value={1}
+      >
+        Test user 
+        1
+      </option>
+      <option
+        value={2}
+      >
+        Test user 
+        2
+      </option>
+      <option
+        value={3}
+      >
+        Test user 
+        3
+      </option>
+      <option
+        value={4}
+      >
+        Test user 
+        4
+      </option>
+      <option
+        value={5}
+      >
+        Test user 
+        5
+      </option>
+      <option
+        value={6}
+      >
+        Test user 
+        6
+      </option>
+      <option
+        value={7}
+      >
+        Test user 
+        7
+      </option>
+      <option
+        value={8}
+      >
+        Test user 
+        8
+      </option>
+      <option
+        value={9}
+      >
+        Test user 
+        9
+      </option>
+      <option
+        value={10}
+      >
+        Test user 
+        10
+      </option>
+      <option
+        value={11}
+      >
+        Test user 
+        11
+      </option>
+      <option
+        value={12}
+      >
+        Test user 
+        12
+      </option>
+      <option
+        value={13}
+      >
+        Test user 
+        13
+      </option>
+      <option
+        value={14}
+      >
+        Test user 
+        14
+      </option>
+      <option
+        value={15}
+      >
+        Test user 
+        15
+      </option>
+      <option
+        value={16}
+      >
+        Test user 
+        16
+      </option>
+      <option
+        value={17}
+      >
+        Test user 
+        17
+      </option>
+      <option
+        value={18}
+      >
+        Test user 
+        18
+      </option>
+      <option
+        value={19}
+      >
+        Test user 
+        19
+      </option>
+      <option
+        value={20}
+      >
+        Test user 
+        20
+      </option>
+      <option
+        value={21}
+      >
+        Test user 
+        21
+      </option>
+      <option
+        value={22}
+      >
+        Test user 
+        22
+      </option>
+      <option
+        value={23}
+      >
+        Test user 
+        23
+      </option>
+      <option
+        value={24}
+      >
+        Test user 
+        24
+      </option>
+      <option
+        value={25}
+      >
+        Test user 
+        25
+      </option>
+      <option
+        value={26}
+      >
+        Test user 
+        26
+      </option>
+      <option
+        value={27}
+      >
+        Test user 
+        27
+      </option>
+      <option
+        value={28}
+      >
+        Test user 
+        28
+      </option>
+      <option
+        value={29}
+      >
+        Test user 
+        29
+      </option>
+      <option
+        value={30}
+      >
+        Test user 
+        30
+      </option>
+      <option
+        value={31}
+      >
+        Test user 
+        31
+      </option>
+      <option
+        value={32}
+      >
+        Test user 
+        32
+      </option>
+      <option
+        value={33}
+      >
+        Test user 
+        33
+      </option>
+      <option
+        value={34}
+      >
+        Test user 
+        34
+      </option>
+      <option
+        value={35}
+      >
+        Test user 
+        35
+      </option>
+      <option
+        value={36}
+      >
+        Test user 
+        36
+      </option>
+      <option
+        value={37}
+      >
+        Test user 
+        37
+      </option>
+      <option
+        value={38}
+      >
+        Test user 
+        38
+      </option>
+      <option
+        value={39}
+      >
+        Test user 
+        39
+      </option>
+      <option
+        value={40}
+      >
+        Test user 
+        40
+      </option>
+      <option
+        value={41}
+      >
+        Test user 
+        41
+      </option>
+      <option
+        value={42}
+      >
+        Test user 
+        42
+      </option>
+      <option
+        value={43}
+      >
+        Test user 
+        43
+      </option>
+      <option
+        value={44}
+      >
+        Test user 
+        44
+      </option>
+      <option
+        value={45}
+      >
+        Test user 
+        45
+      </option>
+      <option
+        value={46}
+      >
+        Test user 
+        46
+      </option>
+      <option
+        value={47}
+      >
+        Test user 
+        47
+      </option>
+      <option
+        value={48}
+      >
+        Test user 
+        48
+      </option>
+    </select>
+  </div>
   <button
     className="c0"
     onClick={[Function]}

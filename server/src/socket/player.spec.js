@@ -31,7 +31,16 @@ describe('playerHandler', () => {
       })
       expect(socket.emit.mock.calls[0]).toEqual(['action', {
         type: actions.GET_PLAYERS_SUCCESS,
-        data: [normalUserFixture],
+        data: [{
+          displayName: normalUserFixture.displayName,
+          id: normalUserFixture.id,
+          smallAvatarUrl: normalUserFixture.smallAvatarUrl,
+          steamId: normalUserFixture.steamId,
+          country: 'FI',
+          role: null,
+          team: null,
+          squad: null,
+        }],
       }])
     })
 
@@ -65,7 +74,16 @@ describe('playerHandler', () => {
       }])
       expect(io.emit.mock.calls[0]).toEqual(['action', {
         type: actions.GET_PLAYERS_SUCCESS,
-        data: [normalUserFixture],
+        data: [{
+          displayName: normalUserFixture.displayName,
+          id: normalUserFixture.id,
+          smallAvatarUrl: normalUserFixture.smallAvatarUrl,
+          steamId: normalUserFixture.steamId,
+          country: 'FI',
+          role: null,
+          team: null,
+          squad: null,
+        }],
       }])
     })
 
@@ -95,7 +113,16 @@ describe('playerHandler', () => {
       }])
       expect(io.emit.mock.calls[0]).toEqual(['action', {
         type: actions.GET_PLAYERS_SUCCESS,
-        data: [normalUserFixture],
+        data: [{
+          displayName: normalUserFixture.displayName,
+          id: normalUserFixture.id,
+          smallAvatarUrl: normalUserFixture.smallAvatarUrl,
+          steamId: normalUserFixture.steamId,
+          country: 'FI',
+          role: null,
+          team: null,
+          squad: null,
+        }],
       }])
       expect(io.emit.mock.calls[1]).toEqual(['action', {
         type: actions.GET_GAME_SUCCESS,
@@ -103,6 +130,7 @@ describe('playerHandler', () => {
           id: 2,
           maxPlayers: 1,
           status: gameStatuses.VOTE_CAPTAINS,
+          teamWithTurnToPick: null,
         },
       }])
     })

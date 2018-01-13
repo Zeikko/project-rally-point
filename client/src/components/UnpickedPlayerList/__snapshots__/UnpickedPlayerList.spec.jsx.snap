@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnpickedPlayerList renders a player correctly 1`] = `
+.c0 {
+  font-size: 20px;
+}
+
+<div>
+  <div
+    className="c0"
+  >
+    Players waiting for a game (
+    0
+     players)
+  </div>
+</div>
+`;
+
+exports[`UnpickedPlayerList renders initial state correctly 1`] = `null`;

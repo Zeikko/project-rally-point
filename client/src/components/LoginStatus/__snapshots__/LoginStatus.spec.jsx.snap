@@ -59,7 +59,6 @@ exports[`LoginStatus renders logged in state correctly 1`] = `
   </div>
   <button
     className="c3"
-    href="/api/auth/login"
     onClick={[Function]}
   >
     Logout

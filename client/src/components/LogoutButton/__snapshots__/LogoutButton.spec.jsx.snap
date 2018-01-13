@@ -10,7 +10,6 @@ exports[`LogoutButton renders correctly 1`] = `
 
 <button
   className="c0"
-  href="/api/auth/login"
   onClick={[Function]}
 >
   Logout

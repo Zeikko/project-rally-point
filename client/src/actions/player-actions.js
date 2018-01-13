@@ -13,3 +13,13 @@ export const leaveGameAction = (gameId, userId) => ({
   gameId,
   userId,
 })
+
+export const pickPlayerAction = (gameId, userId, team, squad, role) => ({
+  type: actions.PICK_PLAYER_REQUEST,
+  socket: true,
+  gameId,
+  userId,
+  team,
+  squad,
+  role
+})

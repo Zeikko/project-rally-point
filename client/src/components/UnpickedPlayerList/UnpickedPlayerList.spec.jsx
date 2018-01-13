@@ -1,12 +1,12 @@
 import React from 'react'
 import { matchComponentToSnapshot } from '../../test/snapshot'
-import PlayersList from './PlayersList'
+import UnpickedPlayerList from './UnpickedPlayerList'
 import normalUser from '../../../../fixtures/normal-user.json'
 import game from '../../../../fixtures/game.json'
 
-describe('PlayersList', () => {
+describe('UnpickedPlayerList', () => {
   it('renders initial state correctly', () => {
-    matchComponentToSnapshot(<PlayersList
+    matchComponentToSnapshot(<UnpickedPlayerList
       dispatch={() => {}}
       gameState={{ game }}
       playersState={{ players: [] }}
@@ -16,7 +16,7 @@ describe('PlayersList', () => {
   })
 
   it('renders a player correctly', () => {
-    matchComponentToSnapshot(<PlayersList
+    matchComponentToSnapshot(<UnpickedPlayerList
       dispatch={() => {}}
       gameState={{ game }}
       playersState={{ players: [normalUser] }}

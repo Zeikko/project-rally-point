@@ -118,12 +118,18 @@ describe('gameHandler', () => {
     })
 
     it('starts squad leader pick', async () => {
-      const { 0: game } = await db('game').insert({ maxPlayers: 1, status: gameStatuses.VOTE_CAPTAINS }).returning('*')
+      const { 0: game } = await db('game').insert({ maxPlayers: 2, status: gameStatuses.VOTE_CAPTAINS }).returning('*')
       const io = { emit: jest.fn() }
       const socket = { emit: jest.fn(), userId: 1 }
       await db('player').insert([
         { userId: 1, gameId: game.id },
         { userId: 2, gameId: game.id },
+      ])
+      await db('captainVote').insert([
+        { gameId: game.id,
+          votedId: 1,
+          voterId: 2,
+        }
       ])
       await handleCaptainVote(io, socket, {
         type: actions.CAPTAIN_VOTE_REQUEST,
@@ -138,6 +144,11 @@ describe('gameHandler', () => {
         captainVotes: [{
           gameId: 2,
           id: 1,
+          votedId: 1,
+          voterId: 2,
+        }, {
+          gameId: 2,
+          id: 2,
           votedId: 2,
           voterId: 1,
         }],
@@ -146,8 +157,9 @@ describe('gameHandler', () => {
         type: actions.GET_GAME_SUCCESS,
         data: {
           id: 2,
-          maxPlayers: 1,
+          maxPlayers: 2,
           status: gameStatuses.SQUAD_LEADER_PICK,
+          teamWithTurnToPick: 1,
         },
       }])
     })

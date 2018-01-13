@@ -1,6 +1,14 @@
 import db from '../db'
 import actions from '../../../common/actions.json'
-import { startCaptainVote, getGameStatus, shouldStartCaptainVote } from '../helpers/game'
+import {
+  startCaptainVote,
+  getGameStatus,
+  shouldStartCaptainVote,
+  passPlayerPickTurn,
+  shouldStartSquadMemberPick,
+  startSquadMemberPick
+} from '../helpers/game'
+import { getGamePlayers } from '../helpers/player'
 import logger from '../logger'
 import gameStatuses from '../../../common/game-statuses.json'
 
@@ -12,6 +20,8 @@ export default function handlePlayer(io, socket, action) {
       return joinGameRequest(io, socket, action.gameId)
     case actions.LEAVE_GAME_REQUEST:
       return leaveGameRequest(io, socket, action.gameId)
+    case actions.PICK_PLAYER_REQUEST:
+      return pickPlayerRequest(io, socket, action.gameId, action.userId, action.team, action.squad, action.role)
     default:
       return null
   }
@@ -70,14 +80,33 @@ async function leaveGameRequest(io, socket, gameId) {
   }
 }
 
-function getGamePlayers(gameId) {
-  return db('player')
-    .select(['user.*'])
-    .leftJoin('user', 'player.userId', 'user.id')
-    .where({ gameId })
-}
-
 async function broadcastGamePlayersUpdate(io, gameId) {
   const players = await getGamePlayers(gameId)
   io.emit('action', { type: actions.GET_PLAYERS_SUCCESS, data: players })
+}
+
+async function pickPlayerRequest(io, socket, gameId, userId, team, squad, role) {
+  try {
+    await db('player')
+      .update({
+        team,
+        squad,
+        role
+      })
+      .where({
+        gameId,
+        userId
+      })
+    let game = await passPlayerPickTurn(gameId, team)
+    socket.emit('action', { type: actions.PICK_PLAYER_SUCCESS })
+    await broadcastGamePlayersUpdate(io, gameId)
+    const willStartSquadMemberPick = await shouldStartSquadMemberPick(gameId)
+    if (willStartSquadMemberPick) {
+      game = await startSquadMemberPick(gameId)
+    }
+    io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
+  } catch (error) {
+    logger.exception(error)
+    socket.emit('action', { type: actions.PICK_PLAYER_ERROR })
+  }
 }
