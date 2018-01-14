@@ -18,7 +18,7 @@ exports[`VoteCaptainButton renders button when voting for a captain 1`] = `
 </button>
 `;
 
-exports[`VoteCaptainButton renders number of votes when already for a captain 1`] = `
+exports[`VoteCaptainButton renders number of votes when already voted for a captain 1`] = `
 <span>
   1
 </span>

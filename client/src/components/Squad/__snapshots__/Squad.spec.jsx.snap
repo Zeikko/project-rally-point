@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UnpickedPlayerList renders a player correctly 1`] = `
+exports[`Squad renders correctly 1`] = `
 .c0 {
   font-size: 20px;
 }
@@ -9,7 +9,9 @@ exports[`UnpickedPlayerList renders a player correctly 1`] = `
   <div
     className="c0"
   >
-    Players waiting for a game (
+    Squad 
+    1
+     (
     1
      players)
   </div>
@@ -27,5 +29,3 @@ exports[`UnpickedPlayerList renders a player correctly 1`] = `
   </div>
 </div>
 `;
-
-exports[`UnpickedPlayerList renders initial state correctly 1`] = `null`;

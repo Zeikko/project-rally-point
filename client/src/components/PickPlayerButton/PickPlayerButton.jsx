@@ -32,7 +32,7 @@ class PickPlayerButton extends Component {
       const squad = numberOfSquadLeadersInTeam + 2
       return (
         <Button onClick={() => { this.handleClick(squad, playerRoles.SQUAD_LEADER) }}>
-          Pick
+          Pick Captain
         </Button>
       )
     }

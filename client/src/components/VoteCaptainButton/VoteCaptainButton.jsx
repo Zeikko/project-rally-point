@@ -14,7 +14,7 @@ class VoteCaptainButton extends Component {
 
   handleClick() {
     const { dispatch, player, game } = this.props
-    dispatch(voteCaptainAction(game.game.id, player.id))
+    dispatch(voteCaptainAction(game.id, player.id))
   }
 
   render() {
@@ -24,9 +24,9 @@ class VoteCaptainButton extends Component {
     if (game.status !== gameStatuses.VOTE_CAPTAINS) {
       return null
     }
-    const userHasVoted = _.find(captainVotes.captainVotes, { voterId: user.id })
+    const userHasVoted = _.find(captainVotes, { voterId: user.id })
     if (userHasVoted) {
-      const votes = _.filter(captainVotes.captainVotes, { votedId: player.id }).length
+      const votes = _.filter(captainVotes, { votedId: player.id }).length
       return <span>{ votes }</span>
     }
     return (

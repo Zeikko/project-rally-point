@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PickPlayerButton does not render anything when it is not time to pick player 1`] = `null`;
+
+exports[`PickPlayerButton renders button to pick a captain 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+>
+  Pick Captain
+</button>
+`;

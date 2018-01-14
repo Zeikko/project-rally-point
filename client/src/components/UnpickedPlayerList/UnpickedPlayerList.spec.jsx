@@ -3,25 +3,26 @@ import { matchComponentToSnapshot } from '../../test/snapshot'
 import UnpickedPlayerList from './UnpickedPlayerList'
 import normalUser from '../../../../fixtures/normal-user.json'
 import game from '../../../../fixtures/game.json'
+import player from '../../../../fixtures/player.json'
 
 describe('UnpickedPlayerList', () => {
   it('renders initial state correctly', () => {
     matchComponentToSnapshot(<UnpickedPlayerList
       dispatch={() => {}}
-      gameState={{ game }}
-      playersState={{ players: [] }}
-      captainVotesState={{ captainVotes: [] }}
-      userState={{ isLoading: false, user: null }}
+      game={game}
+      players={[]}
+      captainVotes={[]}
+      user={normalUser}
     />)
   })
 
   it('renders a player correctly', () => {
     matchComponentToSnapshot(<UnpickedPlayerList
       dispatch={() => {}}
-      gameState={{ game }}
-      playersState={{ players: [normalUser] }}
-      captainVotesState={{ captainVotes: [] }}
-      userState={{ isLoading: false, user: null }}
+      game={game}
+      players={[player]}
+      captainVotes={[]}
+      user={normalUser}
     />)
   })
 })

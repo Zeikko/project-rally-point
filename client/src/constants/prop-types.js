@@ -14,7 +14,14 @@ export const user = PropTypes.shape({
 })
 
 export const player = PropTypes.shape({
-
+  country: PropTypes.string,
+  displayName: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  smallAvatarUrl: PropTypes.string,
+  steamId: PropTypes.string.isRequired,
+  role: PropTypes.string,
+  team: PropTypes.string,
+  squad: PropTypes.string,
 })
 
 export const game = PropTypes.shape({
