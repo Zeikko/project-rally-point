@@ -1,5 +1,4 @@
 import React from 'react'
-import { mount } from 'enzyme'
 import { matchComponentToSnapshot } from '../../test/snapshot'
 import Player from './Player'
 import player from '../../../../fixtures/player.json'

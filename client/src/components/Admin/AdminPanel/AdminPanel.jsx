@@ -12,18 +12,19 @@ function AdminPanel(props) {
   const {
     dispatch, userState, gameState,
   } = props
-  if (_.get(userState, 'user.role') !== 'admin') {
-    return null
+  const role = _.get(userState, 'user.role')
+  if (role === 'admin' || role === 'simulated user') {
+    return (
+      <div>
+        <SimulateUserSelect dispatch={dispatch} />
+        <SimulateQueueFull gameState={gameState} dispatch={dispatch} />
+        <SimulateQueueEmpty gameState={gameState} dispatch={dispatch} />
+        <SimulateCaptainVotes gameState={gameState} dispatch={dispatch} />
+        <CreateGameButton dispatch={dispatch} />
+      </div>
+    )
   }
-  return (
-    <div>
-      <SimulateUserSelect dispatch={dispatch} />
-      <SimulateQueueFull gameState={gameState} dispatch={dispatch} />
-      <SimulateQueueEmpty gameState={gameState} dispatch={dispatch} />
-      <SimulateCaptainVotes gameState={gameState} dispatch={dispatch} />
-      <CreateGameButton dispatch={dispatch} />
-    </div>
-  )
+  return null
 }
 
 AdminPanel.propTypes = {

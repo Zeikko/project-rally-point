@@ -20,8 +20,8 @@ export const player = PropTypes.shape({
   smallAvatarUrl: PropTypes.string,
   steamId: PropTypes.string.isRequired,
   role: PropTypes.string,
-  team: PropTypes.string,
-  squad: PropTypes.string,
+  team: PropTypes.number,
+  squad: PropTypes.number,
 })
 
 export const game = PropTypes.shape({

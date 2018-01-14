@@ -24,6 +24,7 @@ describe('gameHandler', () => {
           id: 1,
           status: gameStatuses.QUEUE,
           maxPlayers: 48,
+          teamWithTurnToPick: null,
         },
         type: actions.GET_GAME_SUCCESS,
       }])
@@ -54,6 +55,7 @@ describe('gameHandler', () => {
           id: 2,
           status: gameStatuses.QUEUE,
           maxPlayers: 48,
+          teamWithTurnToPick: null,
         },
         type: actions.GET_GAME_SUCCESS,
       }])

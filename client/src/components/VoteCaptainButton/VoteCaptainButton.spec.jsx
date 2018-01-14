@@ -4,7 +4,6 @@ import { matchComponentToSnapshot } from '../../test/snapshot'
 import VoteCaptainButton from './VoteCaptainButton'
 import game from '../../../../fixtures/game.json'
 import normalUser from '../../../../fixtures/normal-user.json'
-import initialState from '../../initial-state'
 import gameStatuses from '../../../../common/game-statuses.json'
 import actions from '../../../../common/actions.json'
 
@@ -15,7 +14,7 @@ describe('VoteCaptainButton', () => {
       player={normalUser}
       game={game}
       captainVotes={[]}
-      user={initialState.userState}
+      user={normalUser}
     />)
   })
 

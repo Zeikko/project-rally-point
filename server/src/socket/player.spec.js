@@ -3,6 +3,7 @@ import normalUserFixture from '../../../fixtures/normal-user.json'
 import handlePlayer from './player'
 import actions from '../../../common/actions.json'
 import gameStatuses from '../../../common/game-statuses.json'
+import playerRoles from '../../../common/player-roles.json'
 
 describe('playerHandler', () => {
   it('does nothing for non matching action', async () => {
@@ -202,6 +203,103 @@ describe('playerHandler', () => {
       })
       expect(socket.emit.mock.calls[0]).toEqual(['action', {
         type: actions.LEAVE_GAME_ERROR,
+      }])
+    })
+  })
+
+  describe('PICK_PLAYER_REQUEST', () => {
+    it('picks a player', async () => {
+      const io = { emit: jest.fn() }
+      const socket = {
+        emit: jest.fn(),
+        userId: normalUserFixture.id,
+      }
+      await handlePlayer(io, socket, {
+        type: actions.PICK_PLAYER_REQUEST,
+        gameId: 1,
+        userId: 1,
+        team: 1,
+        squad: 1,
+        role: 1,
+      })
+      expect(socket.emit.mock.calls[0]).toEqual(['action', {
+        type: actions.PICK_PLAYER_SUCCESS,
+      }])
+      expect(io.emit.mock.calls[0]).toEqual(['action', {
+        type: actions.GET_PLAYERS_SUCCESS,
+        data: [],
+      }])
+    })
+
+    it('starts squad member pick', async () => {
+      const { 0: game } = await db('game').insert({
+        status: gameStatuses.VOTE_CAPTAINS,
+        maxPlayers: 36,
+      }).returning('*')
+      await db('user').insert(normalUserFixture)
+      await db('user').insert({ ...normalUserFixture, id: 50 })
+      await db('player').insert({ gameId: game.id, userId: 49 })
+      await db('player').insert({
+        gameId: game.id,
+        userId: 50,
+        team: 2,
+        squad: 1,
+        role: playerRoles.SQUAD_LEADER,
+      })
+      const io = { emit: jest.fn() }
+      const socket = { emit: jest.fn(), userId: normalUserFixture.id }
+      await handlePlayer(io, socket, {
+        type: actions.PICK_PLAYER_REQUEST,
+        gameId: game.id,
+        userId: 49,
+        team: 1,
+        squad: 1,
+        role: playerRoles.SQUAD_LEADER,
+      })
+      expect(socket.emit.mock.calls[0]).toEqual(['action', {
+        type: actions.PICK_PLAYER_SUCCESS,
+      }])
+      expect(io.emit.mock.calls[0]).toEqual(['action', {
+        type: actions.GET_PLAYERS_SUCCESS,
+        data: [{
+          displayName: normalUserFixture.displayName,
+          id: normalUserFixture.id,
+          smallAvatarUrl: normalUserFixture.smallAvatarUrl,
+          steamId: normalUserFixture.steamId,
+          country: 'FI',
+          role: playerRoles.SQUAD_LEADER,
+          team: 1,
+          squad: 1,
+        }, {
+          displayName: normalUserFixture.displayName,
+          id: 50,
+          smallAvatarUrl: normalUserFixture.smallAvatarUrl,
+          steamId: normalUserFixture.steamId,
+          country: 'FI',
+          role: playerRoles.SQUAD_LEADER,
+          team: 2,
+          squad: 1,
+        }],
+      }])
+      expect(io.emit.mock.calls[1]).toEqual(['action', {
+        type: actions.GET_GAME_SUCCESS,
+        data: {
+          id: game.id,
+          maxPlayers: 36,
+          status: gameStatuses.SQUAD_MEMBER_PICK,
+          teamWithTurnToPick: 2,
+        },
+      }])
+    })
+
+    it('handles an error', async () => {
+      const io = { emit: jest.fn() }
+      const socket = { emit: jest.fn() }
+      await handlePlayer(io, socket, {
+        type: actions.PICK_PLAYER_REQUEST,
+      })
+      expect(socket.emit.mock.calls[0]).toEqual(['action', {
+        type: actions.PICK_PLAYER_ERROR,
       }])
     })
   })

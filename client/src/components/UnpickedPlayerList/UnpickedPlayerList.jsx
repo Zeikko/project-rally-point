@@ -40,12 +40,16 @@ function UnpickedPlayersList(props) {
   )
 }
 
+UnpickedPlayersList.defaultProps = {
+  user: null,
+}
+
 UnpickedPlayersList.propTypes = {
   dispatch: PropTypes.func.isRequired,
   game: propTypes.game.isRequired,
   players: PropTypes.arrayOf(propTypes.player).isRequired,
   captainVotes: PropTypes.arrayOf(propTypes.captainVote).isRequired,
-  user: propTypes.user.isRequired,
+  user: propTypes.user,
 }
 
 export default UnpickedPlayersList

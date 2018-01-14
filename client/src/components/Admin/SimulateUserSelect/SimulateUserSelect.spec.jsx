@@ -2,7 +2,6 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { matchComponentToSnapshot } from '../../../test/snapshot'
 import SimulateUserSelect from './SimulateUserSelect'
-import game from '../../../../../fixtures/game.json'
 
 describe('SimulateUserSelect', () => {
   it('renders correctly', () => {

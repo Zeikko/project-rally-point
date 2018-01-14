@@ -1,6 +1,5 @@
 import userReducer from './user-reducer'
 import actions from '../../../common/actions.json'
-import normalUser from '../../../fixtures/normal-user.json'
 import initialState from '../initial-state'
 
 describe('userReducer', () => {

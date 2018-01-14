@@ -72,7 +72,7 @@ export function getGameStatus(gameId) {
 export async function passPlayerPickTurn(id, currentTeam) {
   const games = await db('game')
     .update({
-      teamWithTurnToPick: currentTeam === 1 ? 2 : 1,
+      teamWithTurnToPick: (currentTeam % 2) + 1,
     })
     .where({ id })
     .returning('*')
