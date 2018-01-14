@@ -11,7 +11,7 @@ exports.up = knex => (
         'CAPTAIN',
         'SQUAD_LEADER',
         'SQUAD_MEMBER',
-      ])
+      ]).defaultTo('NONE')
     })
     .then(() =>
       knex.raw(`

@@ -95,7 +95,11 @@ async function broadcastGamePlayersUpdate(io, gameId) {
 
 async function pickPlayerRequest(io, socket, gameId, userId, team, squad, role) {
   try {
-    await db('player')
+    let game = await getGameStatus(gameId)
+    if (game.status !== gameStatuses.SQUAD_LEADER_PICK) {
+      throw Error('Game is not in pick status')
+    }
+    const player = await db('player')
       .update({
         team,
         squad,
@@ -105,7 +109,11 @@ async function pickPlayerRequest(io, socket, gameId, userId, team, squad, role) 
         gameId,
         userId,
       })
-    let game = await passPlayerPickTurn(gameId, team)
+      .returning('*')
+    if (player.length === 0) {
+      throw Error('Picked player is not in the game')
+    }
+    game = await passPlayerPickTurn(gameId, team)
     socket.emit('action', { type: actions.PICK_PLAYER_SUCCESS })
     await broadcastGamePlayersUpdate(io, gameId)
     const willStartSquadMemberPick = await shouldStartSquadMemberPick(gameId)
