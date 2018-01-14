@@ -210,7 +210,7 @@ describe('playerHandler', () => {
   describe('PICK_PLAYER_REQUEST', () => {
     it('picks a player', async () => {
       const { 0: game } = await db('game').insert({
-        status: gameStatuses.SQUAD_LEADER_PICK
+        status: gameStatuses.SQUAD_LEADER_PICK,
       }).returning('*')
       await db('user').insert(normalUserFixture)
       await db('player').insert({ gameId: game.id, userId: 49 })
@@ -247,7 +247,7 @@ describe('playerHandler', () => {
 
     it('throws an error when user who is not in the game', async () => {
       const { 0: game } = await db('game').insert({
-        status: gameStatuses.SQUAD_LEADER_PICK
+        status: gameStatuses.SQUAD_LEADER_PICK,
       }).returning('*')
       const io = { emit: jest.fn() }
       const socket = {
@@ -269,7 +269,7 @@ describe('playerHandler', () => {
 
     it('throws an error when the game is not in the squad leader pick', async () => {
       const { 0: game } = await db('game').insert({
-        status: gameStatuses.QUEUE
+        status: gameStatuses.QUEUE,
       }).returning('*')
       const io = { emit: jest.fn() }
       const socket = {
