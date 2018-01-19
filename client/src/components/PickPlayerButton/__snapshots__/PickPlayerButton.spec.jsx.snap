@@ -14,6 +14,6 @@ exports[`PickPlayerButton renders button to pick a captain 1`] = `
   className="c0"
   onClick={[Function]}
 >
-  Pick Captain
+  Pick Player
 </button>
 `;

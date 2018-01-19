@@ -14,12 +14,20 @@ export const leaveGameAction = (gameId, userId) => ({
   userId,
 })
 
-export const pickPlayerAction = (gameId, userId, team, squad, role) => ({
-  type: actions.PICK_PLAYER_REQUEST,
+export const pickSquadLeaderAction = (gameId, playerId, team, userId) => ({
+  type: actions.PICK_SQUAD_LEADER_REQUEST,
   socket: true,
   gameId,
-  userId,
+  playerId,
   team,
-  squad,
-  role,
+  userId
+})
+
+export const pickSquadMemberAction = (gameId, playerId, team, userId) => ({
+  type: actions.PICK_SQUAD_MEMBER_REQUEST,
+  socket: true,
+  gameId,
+  playerId,
+  team,
+  userId
 })

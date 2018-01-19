@@ -3,7 +3,6 @@ import db from '../db'
 import gameStatuses from '../../../common/game-statuses.json'
 import playerRoles from '../../../common/player-roles.json'
 
-
 export async function shouldStartCaptainVote(gameId) {
   const game = await db('game')
     .first('*')
@@ -29,9 +28,13 @@ export async function shouldStartSquadMemberPick(gameId) {
     .first('*')
     .where({ id: gameId })
   const numberOfSquadLeaders = await db('player')
-    .count('id')
-    .where({ gameId, role: playerRoles.SQUAD_LEADER })
-  return (parseInt(numberOfSquadLeaders[0].count, 10) + 2) === Math.ceil(game.maxPlayers / 9)
+    .select('id')
+    .where({
+      gameId,
+      role: playerRoles.SQUAD_LEADER,
+      team: game.teamWithTurnToPick,
+    })
+  return (numberOfSquadLeaders.length + 1) === getOptimalNumberOfSquads(game)
 }
 
 export async function startCaptainVote(gameId) {
@@ -69,12 +72,40 @@ export function getGameStatus(gameId) {
     .where({ id: gameId })
 }
 
-export async function passPlayerPickTurn(id, currentTeam) {
+export async function passSquadLeaderPickTurn(game) {
   const games = await db('game')
     .update({
-      teamWithTurnToPick: (currentTeam % 2) + 1,
+      teamWithTurnToPick: (game.teamWithTurnToPick % 2) + 1,
     })
-    .where({ id })
+    .where({ id: game.id })
     .returning('*')
   return _.first(games)
+}
+
+export async function passPlayerPickTurn(game, playersCount) {
+  const nextTeamWithTurnToPick = await calculatePickTurn(game, playersCount)
+  const games = await db('game')
+    .update({
+      teamWithTurnToPick: nextTeamWithTurnToPick,
+    })
+    .where({ id: game.id })
+    .returning('*')
+  return _.first(games)
+}
+
+async function calculatePickTurn(game, playersCount) {
+  if (game.status === gameStatuses.SQUAD_MEMBER_PICK) {
+    const numberOfSquads = getOptimalNumberOfSquads(game)
+    console.log(playersCount)
+    console.log(numberOfSquads)
+    console.log(playersCount % numberOfSquads === 0)
+    if (playersCount % numberOfSquads === 0) {
+      return (game.teamWithTurnToPick % 2) + 1
+    }
+    return game.teamWithTurnToPick
+  }
+}
+
+export function getOptimalNumberOfSquads(game) {
+  return Math.ceil(game.maxPlayers / 2 / 9)
 }

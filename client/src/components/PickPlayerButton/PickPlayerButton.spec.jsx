@@ -47,13 +47,12 @@ describe('PickPlayerButton', () => {
     wrapper.find('button').simulate('click')
     expect(dispatch.mock.calls[0]).toEqual([
       {
-        type: actions.PICK_PLAYER_REQUEST,
+        type: actions.PICK_SQUAD_LEADER_REQUEST,
         socket: true,
         gameId: 1,
-        squad: 2,
         team: 1,
         userId: 1,
-        role: playerRoles.SQUAD_LEADER,
+        playerId: 1,
       },
     ])
   })
