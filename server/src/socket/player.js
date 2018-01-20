@@ -10,6 +10,8 @@ import {
   startSquadMemberPick,
   getOptimalNumberOfSquads,
   passSquadLeaderPickTurn,
+  shouldStartPlayingGame,
+  startPlayingGame,
 } from '../helpers/game'
 import { getGamePlayers } from '../helpers/player'
 import logger from '../logger'
@@ -105,7 +107,7 @@ async function pickSquadLeaderRequest(io, socket, gameId, playerId) {
   try {
     let { 0: game } = await db('game').select('*').where({ id: gameId })
     if (game.status !== gameStatuses.SQUAD_LEADER_PICK) {
-      throw Error('Game is not in pick status')
+      throw Error('Game is not in pick squad leader status')
     }
     const pickingPlayer = await db('player')
       .first('*')
@@ -159,7 +161,7 @@ async function pickSquadMemberRequest(io, socket, gameId, userId) {
   try {
     let { 0: game } = await db('game').select('*').where({ id: gameId })
     if (game.status !== gameStatuses.SQUAD_MEMBER_PICK) {
-      throw Error('Game is not in pick status')
+      throw Error('Game is not in pick squad member status')
     }
     const pickingPlayer = await db('player')
       .first('*')
@@ -214,15 +216,15 @@ async function pickSquadMemberRequest(io, socket, gameId, userId) {
       throw Error('Player can not be picked')
     }
     game = await passPlayerPickTurn(game, playersInTeam.length + 1)
-    socket.emit('action', { type: actions.PICK_PLAYER_SUCCESS })
+    socket.emit('action', { type: actions.PICK_SQUAD_MEMBER_SUCCESS })
     await broadcastGamePlayersUpdate(io, gameId)
-    const willStartSquadMemberPick = await shouldStartSquadMemberPick(gameId)
-    if (willStartSquadMemberPick) {
-      game = await startSquadMemberPick(gameId)
+    const willStartPlayingGame = await shouldStartPlayingGame(gameId)
+    if (willStartPlayingGame) {
+      game = await startPlayingGame(gameId)
     }
     io.emit('action', { type: actions.GET_GAME_SUCCESS, data: game })
   } catch (error) {
     logger.exception(error)
-    socket.emit('action', { type: actions.PICK_PLAYER_ERROR })
+    socket.emit('action', { type: actions.PICK_SQUAD_MEMBER_ERROR })
   }
 }

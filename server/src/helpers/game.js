@@ -37,6 +37,17 @@ export async function shouldStartSquadMemberPick(gameId) {
   return (numberOfSquadLeaders.length + 1) === getOptimalNumberOfSquads(game)
 }
 
+export async function shouldStartPlayingGame(gameId) {
+  const game = await db('game')
+    .first('*')
+    .where({ id: gameId })
+  const numberOfPlayers = await db('player')
+    .count('id')
+    .where({ gameId })
+    .whereNotNull('team')
+  return parseInt(numberOfPlayers[0].count, 10) === game.maxPlayers
+}
+
 export async function startCaptainVote(gameId) {
   const games = await db('game')
     .update({ status: gameStatuses.VOTE_CAPTAINS })
@@ -58,9 +69,15 @@ export async function startSquadLeaderPick(gameId) {
 
 export async function startSquadMemberPick(gameId) {
   const games = await db('game')
-    .update({
-      status: gameStatuses.SQUAD_MEMBER_PICK,
-    })
+    .update({ status: gameStatuses.SQUAD_MEMBER_PICK })
+    .where({ id: gameId })
+    .returning('*')
+  return _.first(games)
+}
+
+export async function startPlayingGame(gameId)  {
+  const games = await db('game')
+    .update({ status: gameStatuses.PLAYING })
     .where({ id: gameId })
     .returning('*')
   return _.first(games)
@@ -96,9 +113,6 @@ export async function passPlayerPickTurn(game, playersCount) {
 async function calculatePickTurn(game, playersCount) {
   if (game.status === gameStatuses.SQUAD_MEMBER_PICK) {
     const numberOfSquads = getOptimalNumberOfSquads(game)
-    console.log(playersCount)
-    console.log(numberOfSquads)
-    console.log(playersCount % numberOfSquads === 0)
     if (playersCount % numberOfSquads === 0) {
       return (game.teamWithTurnToPick % 2) + 1
     }
