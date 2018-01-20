@@ -13,20 +13,20 @@ class VoteCaptainButton extends Component {
   }
 
   handleClick() {
-    const { dispatch, player, gameState } = this.props
-    dispatch(voteCaptainAction(gameState.game.id, player.id))
+    const { dispatch, player, game } = this.props
+    dispatch(voteCaptainAction(game.id, player.id))
   }
 
   render() {
     const {
-      player, gameState, captainVotesState, userState,
+      player, game, captainVotes, user,
     } = this.props
-    if (gameState.game.status !== gameStatuses.VOTE_CAPTAINS) {
+    if (game.status !== gameStatuses.VOTE_CAPTAINS) {
       return null
     }
-    const userHasVoted = _.find(captainVotesState.captainVotes, { voterId: userState.user.id })
+    const userHasVoted = _.find(captainVotes, { voterId: user.id })
     if (userHasVoted) {
-      const votes = _.filter(captainVotesState.captainVotes, { votedId: player.id }).length
+      const votes = _.filter(captainVotes, { votedId: player.id }).length
       return <span>{ votes }</span>
     }
     return (
@@ -39,10 +39,10 @@ class VoteCaptainButton extends Component {
 
 VoteCaptainButton.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  player: propTypes.user.isRequired,
-  gameState: propTypes.gameState.isRequired,
-  captainVotesState: propTypes.captainVotesState.isRequired,
-  userState: propTypes.userState.isRequired,
+  player: propTypes.player.isRequired,
+  game: propTypes.game.isRequired,
+  captainVotes: PropTypes.arrayOf(propTypes.captainVote).isRequired,
+  user: propTypes.user.isRequired,
 }
 
 export default VoteCaptainButton

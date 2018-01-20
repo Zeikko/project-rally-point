@@ -16,7 +16,7 @@ class LogoutButton extends Component {
 
   render() {
     return (
-      <Button onClick={this.handleClick} href="/api/auth/login">
+      <Button onClick={this.handleClick}>
         Logout
       </Button>
     )

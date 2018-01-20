@@ -4,6 +4,14 @@ exports.up = knex => (
       table.increments().primary()
       table.integer('gameId').notNullable()
       table.integer('userId').notNullable()
+      table.integer('team')
+      table.integer('squad')
+      table.enum('role', [
+        'NONE',
+        'CAPTAIN',
+        'SQUAD_LEADER',
+        'SQUAD_MEMBER',
+      ]).defaultTo('NONE')
     })
     .then(() =>
       knex.raw(`

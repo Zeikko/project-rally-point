@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Squad renders correctly 1`] = `
+.c0 {
+  font-size: 20px;
+}
+
+<div>
+  <div
+    className="c0"
+  >
+    Squad 
+    1
+     (
+    1
+     players)
+  </div>
+  <div>
+    <div>
+      <img
+        alt="Test user 1"
+        src="https://www.gravatar.com/avatar/1?s=32&d=identicon&r=PG"
+      />
+      Test user 1
+       (
+      FI
+      ) 
+    </div>
+  </div>
+</div>
+`;

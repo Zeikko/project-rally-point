@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LogoutButton renders correctly 1`] = `
+exports[`PickPlayerButton does not render anything when it is not time to pick player 1`] = `null`;
+
+exports[`PickPlayerButton renders button to pick a captain 1`] = `
 .c0 {
   font-size: 18px;
   border: solid black 1px;
@@ -12,6 +14,6 @@ exports[`LogoutButton renders correctly 1`] = `
   className="c0"
   onClick={[Function]}
 >
-  Logout
+  Pick Captain
 </button>
 `;

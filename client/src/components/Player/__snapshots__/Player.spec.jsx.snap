@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Player renders player with a role correctly 1`] = `
+<div>
+  <img
+    alt="Test user 1"
+    src="https://www.gravatar.com/avatar/1?s=32&d=identicon&r=PG"
+  />
+  Test user 1
+   (
+  FI
+  ) 
+  [CAPTAIN]
+</div>
+`;
+
+exports[`Player renders player without a role correctly 1`] = `
+<div>
+  <img
+    alt="Test user 1"
+    src="https://www.gravatar.com/avatar/1?s=32&d=identicon&r=PG"
+  />
+  Test user 1
+   (
+  FI
+  ) 
+</div>
+`;

@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Team renders correctly 1`] = `
+.c1 {
+  font-size: 20px;
+}
+
+.c0 {
+  font-size: 20px;
+}
+
+<div>
+  <div
+    className="c0"
+  >
+    Team 
+    1
+     (
+    1
+     players)
+  </div>
+  <div>
+    <div
+      className="c1"
+    >
+      Squad 
+      1
+       (
+      0
+       players)
+    </div>
+  </div>
+  <div>
+    <div
+      className="c1"
+    >
+      Squad 
+      2
+       (
+      0
+       players)
+    </div>
+  </div>
+  <div>
+    <div
+      className="c1"
+    >
+      Squad 
+      3
+       (
+      0
+       players)
+    </div>
+  </div>
+</div>
+`;

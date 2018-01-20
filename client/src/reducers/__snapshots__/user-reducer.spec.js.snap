@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`userReducer simulates user 1`] = `
+Object {
+  "isLoading": false,
+  "user": Object {
+    "displayName": "Test user 1",
+    "id": 1,
+    "profileUrl": "http://steamcommunity.com/id/1",
+    "role": "simulated user",
+    "smallAvatarUrl": "https://www.gravatar.com/avatar/1?s=32&d=identicon&r=PG",
+    "steamId": "1",
+  },
+}
+`;
