@@ -2,7 +2,25 @@
 
 exports[`PickPlayerButton does not render anything when it is not time to pick player 1`] = `null`;
 
+exports[`PickPlayerButton does not render when user is not in the game 1`] = `null`;
+
 exports[`PickPlayerButton renders button to pick a captain 1`] = `
+.c0 {
+  font-size: 18px;
+  border: solid black 1px;
+  background-color: #AAA;
+  cursor: pointer;
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+>
+  Pick Player
+</button>
+`;
+
+exports[`PickPlayerButton renders button to pick a squad member 1`] = `
 .c0 {
   font-size: 18px;
   border: solid black 1px;

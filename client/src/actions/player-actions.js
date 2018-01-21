@@ -20,7 +20,7 @@ export const pickSquadLeaderAction = (gameId, playerId, team, userId) => ({
   gameId,
   playerId,
   team,
-  userId
+  userId,
 })
 
 export const pickSquadMemberAction = (gameId, playerId, team, userId) => ({
@@ -29,5 +29,5 @@ export const pickSquadMemberAction = (gameId, playerId, team, userId) => ({
   gameId,
   playerId,
   team,
-  userId
+  userId,
 })

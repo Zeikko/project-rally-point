@@ -170,7 +170,8 @@ async function pickSquadMemberRequest(io, socket, gameId, userId) {
         userId: socket.userId,
       })
     const pickingPlayerRole = _.get(pickingPlayer, 'role')
-    if (pickingPlayerRole !== playerRoles.CAPTAIN && pickingPlayerRole !== playerRoles.SQUAD_LEADER) {
+    if (pickingPlayerRole !== playerRoles.CAPTAIN
+      && pickingPlayerRole !== playerRoles.SQUAD_LEADER) {
       throw Error('You are not allowed to pick')
     }
     const players = await db('player')
@@ -191,13 +192,9 @@ async function pickSquadMemberRequest(io, socket, gameId, userId) {
       .groupBy(player => player.squad)
       .size()
       .value()
-    /* console.log(playerCountInSquad)
-    console.log(smallestSquadPlayerCount)
-    console.log(numberOfSquads)
-    console.log(getOptimalNumberOfSquads(game)) */
     if (playerCountInSquad > smallestSquadPlayerCount
-      || (numberOfSquads < getOptimalNumberOfSquads(game) && playerCountInSquad !== 0)
-      || (game.teamWithTurnToPick !== pickingPlayer.team)) {
+      || (numberOfSquads < getOptimalNumberOfSquads(game) && playerCountInSquad !== 0)
+      || (game.teamWithTurnToPick !== pickingPlayer.team)) {
       throw Error('It is not your turn to pick')
     }
     const player = await db('player')

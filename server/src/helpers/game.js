@@ -75,7 +75,7 @@ export async function startSquadMemberPick(gameId) {
   return _.first(games)
 }
 
-export async function startPlayingGame(gameId)  {
+export async function startPlayingGame(gameId) {
   const games = await db('game')
     .update({ status: gameStatuses.PLAYING })
     .where({ id: gameId })
@@ -111,13 +111,11 @@ export async function passPlayerPickTurn(game, playersCount) {
 }
 
 async function calculatePickTurn(game, playersCount) {
-  if (game.status === gameStatuses.SQUAD_MEMBER_PICK) {
-    const numberOfSquads = getOptimalNumberOfSquads(game)
-    if (playersCount % numberOfSquads === 0) {
-      return (game.teamWithTurnToPick % 2) + 1
-    }
-    return game.teamWithTurnToPick
+  const numberOfSquads = getOptimalNumberOfSquads(game)
+  if (playersCount % numberOfSquads === 0) {
+    return (game.teamWithTurnToPick % 2) + 1
   }
+  return game.teamWithTurnToPick
 }
 
 export function getOptimalNumberOfSquads(game) {
