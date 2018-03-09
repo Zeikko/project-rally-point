@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { pickPlayerAction } from '../../actions/player-actions'
+import { pickSquadLeaderAction, pickSquadMemberAction } from '../../actions/player-actions'
 import Button from '../Button/Button'
 import gameStatuses from '../../../../common/game-statuses.json'
 import playerRoles from '../../../../common/player-roles.json'
@@ -13,28 +13,48 @@ class PickPlayerButton extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(squad, role) {
-    const { dispatch, game, player } = this.props
-    dispatch(pickPlayerAction(game.id, player.id, game.teamWithTurnToPick, squad, role))
+  handleClick() {
+    const {
+      dispatch, game, player, user,
+    } = this.props
+    if (game.status === gameStatuses.SQUAD_LEADER_PICK) {
+      dispatch(pickSquadLeaderAction(game.id, player.id, game.teamWithTurnToPick, user.id))
+    } else {
+      dispatch(pickSquadMemberAction(game.id, player.id, game.teamWithTurnToPick, user.id))
+    }
   }
 
   render() {
     const { game, players, user } = this.props
     const userPlayer = _.find(players, { id: user.id })
-    const canPickSquadLeader = game.status === gameStatuses.SQUAD_LEADER_PICK
-      && _.get(userPlayer, 'role') === playerRoles.CAPTAIN
-      && game.teamWithTurnToPick === userPlayer.team
-    if (canPickSquadLeader) {
-      const numberOfSquadLeadersInTeam = _.filter(players, {
-        team: userPlayer.team,
-        role: playerRoles.SQUAD_LEADER,
-      }).length
-      const squad = numberOfSquadLeadersInTeam + 2
-      return (
-        <Button onClick={() => { this.handleClick(squad, playerRoles.SQUAD_LEADER) }}>
-          Pick Captain
-        </Button>
-      )
+    if (userPlayer) {
+      const userPlayerRole = _.get(userPlayer, 'role')
+      const userPlayerTeam = _.get(userPlayer, 'team')
+      const isUserPlayersTurn = game.teamWithTurnToPick === userPlayerTeam
+      const isCaptain = userPlayerRole === playerRoles.CAPTAIN
+      const isSquadLeader = userPlayerRole === playerRoles.SQUAD_LEADER
+      const playersInTeam = _.filter(players, { team: userPlayer.team })
+      const playerCountInSquad = _.filter(playersInTeam, { squad: userPlayer.squad }).length
+      const smallestSquadPlayerCount = _.chain(playersInTeam)
+        .groupBy(player => player.squad)
+        .toArray()
+        .minBy(squad => squad.length)
+        .get('length', 0)
+        .value()
+      const canPickSquadLeader = game.status === gameStatuses.SQUAD_LEADER_PICK
+        && isCaptain
+        && isUserPlayersTurn
+      const canPickSquadMember = game.status === gameStatuses.SQUAD_MEMBER_PICK
+        && (isCaptain || isSquadLeader)
+        && isUserPlayersTurn
+        && playerCountInSquad <= smallestSquadPlayerCount
+      if (canPickSquadLeader || canPickSquadMember) {
+        return (
+          <Button onClick={() => { this.handleClick() }}>
+            Pick Player
+          </Button>
+        )
+      }
     }
     return null
   }
